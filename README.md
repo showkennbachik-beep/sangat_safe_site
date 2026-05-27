@@ -1,8 +1,15 @@
-# SANGAT P.D.F — Document Toolkit
+# SANGAT Tools — PDF & Image Toolkit
 
-A Flask web application offering 33+ PDF tools: merge, split, compress, convert
-(Word/Excel/PPT/JPG/HTML ↔ PDF), OCR, sign, redact, watermark, translate,
-summarize, and more.
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/showkennbachik-beep/sangat_safe_site)
+
+A Flask web application offering 37 PDF tools + 20 Image tools: merge, split,
+compress, convert (Word/Excel/PPT/JPG/HTML ↔ PDF), OCR, sign, redact, watermark,
+translate, summarize, remove background, meme generator, and more.
+
+## One-Click Deploy
+
+Click the button above → Render auto-configures everything from `render.yaml`
+(free tier, no credit card required).
 
 ---
 
