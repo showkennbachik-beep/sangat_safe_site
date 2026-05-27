@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# ── Title & Core SEO ─────────────────────────────────────────────── #}
+    <title>{% block title %}SANGAT Tools — Free PDF &amp; Image Tools Online{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Free online PDF and image tools: merge, compress, convert, resize, crop, remove background, generate memes and more. No installation needed — fast, secure, private.{% endblock %}">
+    <meta name="keywords"    content="{% block meta_keywords %}pdf tools, image tools, merge pdf, compress pdf, resize image, remove background, jpg to png, free online tools{% endblock %}">
+    <meta name="author"      content="SANGAT Tools">
+    <meta name="robots"      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical"    href="{{ site_url }}{{ request.path }}">
+
+    {# ── Open Graph (Facebook, LinkedIn, WhatsApp) ─────────────────────── #}
+    <meta property="og:type"        content="website">
+    <meta property="og:site_name"   content="SANGAT Tools">
+    <meta property="og:url"         content="{{ site_url }}{{ request.path }}">
+    <meta property="og:title"       content="{% block og_title %}SANGAT Tools — Free PDF &amp; Image Tools{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Merge, compress, convert PDFs and images online for free. Fast, secure, no sign-up required.{% endblock %}">
+    <meta property="og:image"       content="{{ site_url }}/static/img/og-image.png">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale"      content="en_US">
+
+    {# ── Twitter / X Card ─────────────────────────────────────────────── #}
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@sangatsafesite">
+    <meta name="twitter:title"       content="{% block twitter_title %}SANGAT Tools — Free PDF &amp; Image Tools{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Merge, compress, convert PDFs and images online for free.{% endblock %}">
+    <meta name="twitter:image"       content="{{ site_url }}/static/img/og-image.png">
+
+    {# ── Favicon (SVG — works in all modern browsers; 32px fallback) ──── #}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 46'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%234f46e5'/><stop offset='100%25' stop-color='%230d9488'/></linearGradient></defs><path d='M9 2H31L45 16V43a2 2 0 01-2 2H9a2 2 0 01-2-2V4a2 2 0 012-2z' fill='url(%23g)'/><path d='M31 2V16H45' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round' opacity='.55'/><path d='M31 27H19a4 4 0 000 8h6a4 4 0 010 8H15' fill='none' stroke='%23fff' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/></svg>" type="image/svg+xml">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="SANGAT">
+
+    {# ── JSON-LD Structured Data ───────────────────────────────────────── #}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SANGAT Tools",
+      "url": "{{ site_url }}",
+      "description": "Free online PDF and image tools — merge, compress, convert, resize, and more. No installation needed.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Merge PDF", "Split PDF", "Compress PDF", "Convert PDF",
+        "OCR PDF", "Sign PDF", "Image Resizer", "Background Remover",
+        "Meme Generator", "Format Converter"
+      ],
+      "creator": {
+        "@type": "Organization",
+        "name": "SANGAT Tools",
+        "url": "{{ site_url }}"
+      }
+    }
+    </script>
+
+    {# ── Performance: preconnect to external origins ──────────────────── #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {# ── Styles ───────────────────────────────────────────────────────── #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    {# ── Dark-mode flash prevention (must run before first paint) ─────── #}
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+
+    {# ── Google Analytics 4 (fires only when GA_MEASUREMENT_ID is set) ── #}
+    {% if ga_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ ga_id }}', { anonymize_ip: true });
+    </script>
+    {% endif %}
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+<!-- Page Transition Overlay -->
+<div id="page-transition" class="page-transition-overlay">
+    <div class="loader-spinner"></div>
+</div><!-- Header / Navbar -->
+<header class="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-label="Sangat logo">
+                    <defs>
+                        <linearGradient id="sangatBadge" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#4f46e5"/>
+                            <stop offset="100%" stop-color="#0d9488"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M9 2 H31 L45 16 V43 a2 2 0 0 1 -2 2 H9 a2 2 0 0 1 -2 -2 V4 a2 2 0 0 1 2 -2 Z" fill="url(#sangatBadge)"/>
+                    <path d="M31 2 V16 H45" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round" opacity="0.55"/>
+                    <path d="M31 27 H19 a4 4 0 0 0 0 8 h6 a4 4 0 0 1 0 8 H15" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">SANGAT<span> Tools</span></div>
+        </a>
+        <nav class="nav-links" id="desktop-nav" style="display: flex; align-items: center; margin-left: auto;">
+            <a href="/">Home</a>
+            <div class="dropdown" style="margin-left: 30px;">
+                <a href="/" style="margin-left: 0; cursor: pointer;">Tools ▾</a>
+                <div class="dropdown-content">
+                    <a href="/#merge-form" onclick="selectToolFromHash()">Merge PDF</a>
+                    <a href="/#split-form" onclick="selectToolFromHash()">Split PDF</a>
+                    <a href="/#compress-form" onclick="selectToolFromHash()">Compress PDF</a>
+                    <a href="/#convert-form" onclick="selectToolFromHash()">Convert PDF</a>
+                    <hr>
+                    <a href="/">All PDF Tools</a>
+                </div>
+            </div>
+            <a href="/pricing">Pricing</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+
+            <div class="dropdown" style="margin-left: 30px;">
+                <a href="#" style="margin-left: 0; color: #d97706; display: flex; align-items: center; gap: 5px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Rate Us
+                </a>
+                <div class="dropdown-content" style="min-width: 260px; padding: 15px; border-top: 3px solid #d97706;">
+                    <div style="font-weight: 800; color: var(--color-navy); margin-bottom: 5px; font-size: 1rem;">Love SANGAT Tools?</div>
+                    <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 15px; line-height: 1.4;">Help us grow by leaving a review or sharing your feedback!</div>
+                    
+                    <a href="https://search.google.com/local/writereview" target="_blank" style="display: flex; align-items: center; gap: 10px; background: var(--color-surface-elevated); border-radius: 8px; padding: 12px !important; margin-bottom: 10px !important; border: 1px solid var(--color-border); box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#4285F4"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                        Review on Google
+                    </a>
+
+                    <a href="https://trustpilot.com/evaluate/" target="_blank" style="display: flex; align-items: center; gap: 10px; background: var(--color-surface-elevated); border-radius: 8px; padding: 12px !important; margin-bottom: 10px !important; border: 1px solid var(--color-border); box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#00b67a"><path d="M12 0l3.708 7.514L24 8.72l-6 5.848L19.416 24 12 20.101 4.584 24 6 14.568 0 8.72l8.292-1.206z"/></svg>
+                        Trustpilot Review
+                    </a>
+                    <hr style="margin: 15px 0 10px 0;">
+                    <a href="/contact" style="display: flex; align-items: center; gap: 10px; color: var(--color-indigo) !important; font-weight: 700; background: transparent; padding: 5px 0 !important;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        Send Direct Feedback
+                    </a>
+                </div>
+            </div>
+            
+            {% if session.user %}
+                <span style="color: var(--color-indigo); margin-left: 30px; font-weight: 600;">[{{ session.user }}]</span>
+                <a href="/logout">Logout</a>
+            {% else %}
+                <a href="/login">Login</a>
+            {% endif %}
+
+            <div style="position: absolute; top: -9999px; left: -9999px;" id="google_translate_element"></div>
+            
+            <div class="dropdown" style="margin-left: 10px;">
+                <button class="icon-btn" aria-label="Select Language">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </button>
+                <div class="dropdown-content" style="right: 0; min-width: 210px; max-height: 380px; overflow-y: auto;">
+                    <div style="padding: 10px 15px; position: sticky; top: 0; background: var(--color-surface); z-index: 2; border-bottom: 1px solid var(--color-border);">
+                        <input type="text" id="lang-search" placeholder="Search language..." oninput="filterLanguages()" style="width: 100%; padding: 8px 10px; border: 1px solid var(--color-input-border); border-radius: 6px; font-size: 0.85rem; outline: none; background: var(--color-bg); color: var(--color-navy);">
+                    </div>
+                    <div id="lang-list">
+                        <a href="#" onclick="changeLanguage('en')">🇺🇸 English</a>
+                        <a href="#" onclick="changeLanguage('es')">🇪🇸 Español</a>
+                        <a href="#" onclick="changeLanguage('fr')">🇫🇷 Français</a>
+                        <a href="#" onclick="changeLanguage('de')">🇩🇪 Deutsch</a>
+                        <a href="#" onclick="changeLanguage('it')">🇮🇹 Italiano</a>
+                        <a href="#" onclick="changeLanguage('pt')">🇧🇷 Português</a>
+                        <a href="#" onclick="changeLanguage('nl')">🇳🇱 Nederlands</a>
+                        <a href="#" onclick="changeLanguage('ru')">🇷🇺 Русский</a>
+                        <a href="#" onclick="changeLanguage('pl')">🇵🇱 Polski</a>
+                        <a href="#" onclick="changeLanguage('sv')">🇸🇪 Svenska</a>
+                        <a href="#" onclick="changeLanguage('no')">🇳🇴 Norsk</a>
+                        <a href="#" onclick="changeLanguage('da')">🇩🇰 Dansk</a>
+                        <a href="#" onclick="changeLanguage('fi')">🇫🇮 Suomi</a>
+                        <a href="#" onclick="changeLanguage('tr')">🇹🇷 Türkçe</a>
+                        <a href="#" onclick="changeLanguage('ar')">🇸🇦 العربية</a>
+                        <a href="#" onclick="changeLanguage('ur')">🇵🇰 اردو</a>
+                        <a href="#" onclick="changeLanguage('fa')">🇮🇷 فارسی</a>
+                        <a href="#" onclick="changeLanguage('hi')">🇮🇳 हिन्दी</a>
+                        <a href="#" onclick="changeLanguage('bn')">🇧🇩 বাংলা</a>
+                        <a href="#" onclick="changeLanguage('pa')">🇮🇳 ਪੰਜਾਬੀ</a>
+                        <a href="#" onclick="changeLanguage('ta')">🇮🇳 தமிழ்</a>
+                        <a href="#" onclick="changeLanguage('te')">🇮🇳 తెలుగు</a>
+                        <a href="#" onclick="changeLanguage('mr')">🇮🇳 मराठी</a>
+                        <a href="#" onclick="changeLanguage('gu')">🇮🇳 ગુજરાતી</a>
+                        <a href="#" onclick="changeLanguage('zh-CN')">🇨🇳 中文 (简体)</a>
+                        <a href="#" onclick="changeLanguage('zh-TW')">🇹🇼 中文 (繁體)</a>
+                        <a href="#" onclick="changeLanguage('ja')">🇯🇵 日本語</a>
+                        <a href="#" onclick="changeLanguage('ko')">🇰🇷 한국어</a>
+                        <a href="#" onclick="changeLanguage('vi')">🇻🇳 Tiếng Việt</a>
+                        <a href="#" onclick="changeLanguage('th')">🇹🇭 ภาษาไทย</a>
+                        <a href="#" onclick="changeLanguage('id')">🇮🇩 Bahasa Indonesia</a>
+                        <a href="#" onclick="changeLanguage('ms')">🇲🇾 Bahasa Melayu</a>
+                        <a href="#" onclick="changeLanguage('tl')">🇵🇭 Filipino</a>
+                        <a href="#" onclick="changeLanguage('sw')">🇰🇪 Kiswahili</a>
+                        <a href="#" onclick="changeLanguage('af')">🇿🇦 Afrikaans</a>
+                        <a href="#" onclick="changeLanguage('he')">🇮🇱 עברית</a>
+                        <a href="#" onclick="changeLanguage('el')">🇬🇷 Ελληνικά</a>
+                        <a href="#" onclick="changeLanguage('cs')">🇨🇿 Čeština</a>
+                        <a href="#" onclick="changeLanguage('ro')">🇷🇴 Română</a>
+                        <a href="#" onclick="changeLanguage('hu')">🇭🇺 Magyar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown" style="margin-left: 5px;">
+                <button class="icon-btn" aria-label="More options">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                </button>
+                <div class="dropdown-content" style="right: 0;">
+                    <a href="#" onclick="toggleViewport('desktop')">🖥️ Desktop View</a>
+                    <a href="#" onclick="toggleViewport('mobile')">📱 Mobile View</a>
+                    <hr>
+                    <a href="/contact">Help / FAQs</a>
+                    <hr>
+                    <div style="padding: 10px 20px; color: var(--color-text-muted); font-size: 0.8rem; font-weight: 600;">Explore</div>
+                    <a href="/features">Features</a>
+                    <a href="/our-story">Our Story</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/press">Press</a>
+                    <hr>
+                    <div style="padding: 10px 20px; color: var(--color-text-muted); font-size: 0.8rem; font-weight: 600;">Legal & Docs</div>
+                    <a href="/api-docs">API &amp; Services</a>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/cookies">Cookie Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/security">Security Compliance</a>
+                </div>
+            </div>
+        </nav>
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle Dark Mode" style="margin-left: 10px;" onclick="toggleDarkMode()">
+            <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg id="sun-icon" style="display: none;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <!-- Hamburger (mobile only) -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile nav backdrop -->
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="toggleMobileNav()"></div>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <div class="mobile-nav-header">
+        <a href="/" class="logo" onclick="toggleMobileNav()">
+            <div class="logo-icon">
+                <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-label="Sangat logo">
+                    <defs><linearGradient id="mbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#0d9488"/></linearGradient></defs>
+                    <path d="M9 2 H31 L45 16 V43 a2 2 0 0 1 -2 2 H9 a2 2 0 0 1 -2 -2 V4 a2 2 0 0 1 2 -2 Z" fill="url(#mbg)"/>
+                    <path d="M31 2 V16 H45" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round" opacity="0.55"/>
+                    <path d="M31 27 H19 a4 4 0 0 0 0 8 h6 a4 4 0 0 1 0 8 H15" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">SANGAT<span> Tools</span></div>
+        </a>
+        <button class="mobile-nav-close" onclick="toggleMobileNav()" aria-label="Close menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="mobile-nav-links">
+        <a href="/" onclick="toggleMobileNav()">🏠 Home</a>
+        <div class="mobile-nav-section">PDF Tools</div>
+        <a href="/" onclick="toggleMobileNav()">📄 All PDF Tools</a>
+        <a href="/#merge-form" onclick="toggleMobileNav()">🔗 Merge PDF</a>
+        <a href="/#split-form" onclick="toggleMobileNav()">✂️ Split PDF</a>
+        <a href="/#compress-form" onclick="toggleMobileNav()">🗜️ Compress PDF</a>
+        <a href="/#convert-form" onclick="toggleMobileNav()">🔄 Convert PDF</a>
+        <div class="mobile-nav-divider"></div>
+        <a href="/pricing" onclick="toggleMobileNav()">💎 Pricing</a>
+        <a href="/features" onclick="toggleMobileNav()">⚡ Features</a>
+        <a href="/about" onclick="toggleMobileNav()">ℹ️ About</a>
+        <a href="/contact" onclick="toggleMobileNav()">💬 Contact</a>
+        <div class="mobile-nav-divider"></div>
+        <div class="mobile-nav-section">More</div>
+        <a href="/blog" onclick="toggleMobileNav()">📝 Blog</a>
+        <a href="/our-story" onclick="toggleMobileNav()">🌟 Our Story</a>
+        <a href="/api-docs" onclick="toggleMobileNav()">🔌 API Docs</a>
+        <div class="mobile-nav-divider"></div>
+        {% if session.user %}
+            <a href="/logout" onclick="toggleMobileNav()" style="color: #e11d48;">👋 Logout ({{ session.user }})</a>
+        {% else %}
+            <a href="/login" onclick="toggleMobileNav()">🔑 Login</a>
+            <a href="/signup" onclick="toggleMobileNav()">✨ Sign Up</a>
+        {% endif %}
+    </div>
+    <div class="mobile-nav-footer">
+        <span>Dark Mode</span>
+        <button class="icon-btn" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()">
+            <svg id="moon-icon-m" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg id="sun-icon-m" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+    </div>
+</nav>
+
+<!-- Main Content Area -->
+<main class="main-content">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Trust Banner (hidden on mobile — bottom nav + footer cover same content) -->
+<div class="trust-banner-section" style="text-align: center; padding: 60px 20px 40px 20px; background: transparent;">
+    <p style="font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 12px;">Trusted Document Processing</p>
+    <h2 style="color: var(--color-navy); font-weight: 800; font-size: 2rem; letter-spacing: -0.5px;">Your files are in good hands.</h2>
+    <p style="color: var(--color-text-muted); font-size: 1rem; margin-top: 10px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">All uploads are encrypted in transit, processed in memory, and automatically deleted within one hour. We never store or share your documents.</p>
+</div>
+
+<!-- Professional Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="/" class="logo" style="margin-bottom: 10px;">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-label="Sangat logo">
+                            <defs>
+                                <linearGradient id="sangatBadgeFooter" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#4f46e5"/>
+                                    <stop offset="100%" stop-color="#0d9488"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M9 2 H31 L45 16 V43 a2 2 0 0 1 -2 2 H9 a2 2 0 0 1 -2 -2 V4 a2 2 0 0 1 2 -2 Z" fill="url(#sangatBadgeFooter)"/>
+                            <path d="M31 2 V16 H45" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round" opacity="0.55"/>
+                            <path d="M31 27 H19 a4 4 0 0 0 0 8 h6 a4 4 0 0 1 0 8 H15" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">SANGAT<span> Tools</span></div>
+                </a>
+                <p>Your ultimate document manipulation suite. Built for speed, security, and enterprise-grade performance.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="/">All PDF Tools</a>
+                <a href="/features">Features</a>
+                <a href="/api-docs">API &amp; Services</a>
+                <a href="/pricing">Pricing</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="/our-story">Our Story</a>
+                <a href="/about">About Us</a>
+                <a href="/blog">Blog</a>
+                <a href="/press">Press</a>
+                <a href="/contact">Contact Support</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/cookies">Cookie Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/security">Security Compliance</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2026 SANGAT Tools. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Rating Modal -->
+<div id="ratingModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Enjoying SANGAT Tools?</h2>
+        <p>Your document is processing! While you wait, we'd love it if you could rate us on Google. It helps us keep the tools free!</p>
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <a href="https://search.google.com/local/writereview" target="_blank" class="submit-btn" style="flex: 1; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: #4285F4;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                Rate on Google
+            </a>
+            <button onclick="closeRatingModal()" class="submit-btn" style="flex: 1; background: var(--color-surface); color: var(--color-navy); border: 1px solid var(--color-border);">Maybe Later</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     COOKIE CONSENT BANNER
+     ============================================================ -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookie consent">
+    <div class="cookie-card">
+        <span class="cookie-icon" aria-hidden="true">🍪</span>
+        <div class="cookie-body">
+            <h3>We use cookies</h3>
+            <p>We use cookies to improve your experience, analyse traffic, and personalise content. By clicking <strong>Accept All</strong> you agree to our <a href="/cookies">Cookie Policy</a>. You can manage your preferences at any time.</p>
+        </div>
+        <div class="cookie-actions">
+            <button class="cookie-btn-accept" onclick="setCookieConsent('accepted')" aria-label="Accept all cookies">Accept All</button>
+            <button class="cookie-btn-decline" onclick="setCookieConsent('declined')" aria-label="Decline non-essential cookies">Decline</button>
+        </div>
+    </div>
+</div>
+
+    {% block scripts %}{% endblock %}
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function changeLanguage(langCode) {
+            var selectField = document.querySelector(".goog-te-combo");
+            if(selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change', { 'bubbles': true }));
+            } else {
+                document.cookie = "googtrans=/en/" + langCode + "; path=/";
+                document.cookie = "googtrans=/en/" + langCode + "; domain=." + window.location.hostname + "; path=/";
+                window.location.reload();
+            }
+        }
+
+        // --- Mobile Nav Toggle ---
+        function toggleMobileNav() {
+            var nav = document.getElementById('mobile-nav');
+            var btn = document.getElementById('hamburger-btn');
+            var backdrop = document.getElementById('mobile-nav-backdrop');
+            var menuTab = document.getElementById('bottom-tab-more');
+            var open = nav.classList.toggle('open');
+            if (backdrop) backdrop.classList.toggle('open', open);
+            if (btn) { btn.setAttribute('aria-expanded', open ? 'true' : 'false'); btn.classList.toggle('is-open', open); }
+            if (menuTab) menuTab.classList.toggle('is-active', open);
+            nav.setAttribute('aria-hidden', open ? 'false' : 'true');
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+
+        // --- Dark Mode Logic ---
+        function _syncDarkIcons(isDark) {
+            ['moon-icon','moon-icon-m'].forEach(function(id){
+                var el = document.getElementById(id);
+                if (el) el.style.display = isDark ? 'none' : 'block';
+            });
+            ['sun-icon','sun-icon-m'].forEach(function(id){
+                var el = document.getElementById(id);
+                if (el) el.style.display = isDark ? 'block' : 'none';
+            });
+        }
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark-mode');
+            const isDark = document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            _syncDarkIcons(isDark);
+        }
+        // Initialize icon state
+        _syncDarkIcons(localStorage.getItem('theme') === 'dark');
+
+        // --- Mobile/Desktop Viewport Logic ---
+        function toggleViewport(type) {
+            var viewport = document.querySelector("meta[name=viewport]");
+            if(type === 'desktop') {
+                viewport.setAttribute('content', 'width=1024');
+            } else {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+            }
+        }
+
+        // --- Language Search Logic ---
+        function filterLanguages() {
+            var input = document.getElementById("lang-search").value.toLowerCase();
+            var links = document.getElementById("lang-list").getElementsByTagName("a");
+            for (var i = 0; i < links.length; i++) {
+                var text = links[i].textContent || links[i].innerText;
+                if (text.toLowerCase().indexOf(input) > -1) {
+                    links[i].style.display = "";
+                } else {
+                    links[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- Cookie Consent Logic ---
+        function setCookieConsent(choice) {
+            localStorage.setItem('cookieConsent', choice);
+            const banner = document.getElementById('cookieBanner');
+            banner.classList.remove('visible');
+            setTimeout(() => { banner.style.display = 'none'; }, 520);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                const banner = document.getElementById('cookieBanner');
+                banner.style.display = 'flex';
+                // Small delay so the CSS transition fires after display:flex
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => { banner.classList.add('visible'); });
+                });
+            } else {
+                document.getElementById('cookieBanner').style.display = 'none';
+            }
+        });
+
+        // --- Rating Modal Logic ---
+        function closeRatingModal() {
+            document.getElementById('ratingModal').classList.remove('active');
+        }
+        
+        // Listen to all upload forms to trigger rating modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('.upload-form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    // Show modal after 1.5s
+                    setTimeout(() => {
+                        document.getElementById('ratingModal').classList.add('active');
+                    }, 1500);
+                });
+            });
+        });
+
+        // --- Page Transition Logic ---
+        window.addEventListener('load', function() {
+            const overlay = document.getElementById('page-transition');
+            if (overlay) {
+                overlay.classList.add('hidden');
+                setTimeout(() => overlay.style.display = 'none', 400);
+            }
+        });
+        
+        // Fix for browser back button cache
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                const overlay = document.getElementById('page-transition');
+                if (overlay) {
+                    overlay.classList.add('hidden');
+                    overlay.style.display = 'none';
+                }
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('a');
+            if (target && target.href && !target.href.startsWith('javascript') && target.target !== '_blank' && target.host === window.location.host) {
+                // If it's a hash link on the SAME page, do not animate
+                if (target.pathname === window.location.pathname && target.hash) {
+                    return; 
+                }
+                
+                // Otherwise, animate
+                e.preventDefault();
+                const overlay = document.getElementById('page-transition');
+                if (overlay) {
+                    overlay.style.display = 'flex';
+                    // Force reflow
+                    void overlay.offsetWidth;
+                    overlay.classList.remove('hidden');
+                    overlay.classList.add('active');
+                    setTimeout(() => {
+                        window.location.href = target.href;
+                    }, 300);
+                } else {
+                    window.location.href = target.href;
+                }
+            }
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- ============================================================
+         MOBILE BOTTOM NAVIGATION
+         ============================================================ -->
+    <nav class="app-bottom-nav" aria-label="Main navigation" id="app-bottom-nav">
+        <div class="app-bottom-nav-inner">
+            <a href="/" class="app-tab" id="bottom-tab-home" aria-label="Home">
+                <span class="tab-icon">🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="/#pdf-tools-section" class="app-tab" id="bottom-tab-pdf" onclick="scrollToSection('pdf-tools-section')" aria-label="PDF tools">
+                <span class="tab-icon">📄</span>
+                <span>PDF</span>
+            </a>
+            <a href="/#image-tools-section" class="app-tab" id="bottom-tab-img" onclick="scrollToSection('image-tools-section')" aria-label="Image tools">
+                <span class="tab-icon">🖼️</span>
+                <span>Images</span>
+            </a>
+            <button class="app-tab" id="bottom-tab-more" onclick="toggleMobileNav()" aria-label="More options">
+                <span class="tab-icon">☰</span>
+                <span>More</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // Smooth scroll to section on same page, navigate if on different page
+        function scrollToSection(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Prevent default link navigation
+                event.preventDefault();
+            }
+        }
+
+        // Bottom nav active tab highlighting
+        (function() {
+            var path = window.location.pathname;
+            var hash = window.location.hash;
+            var homeTab = document.getElementById('bottom-tab-home');
+            var pdfTab  = document.getElementById('bottom-tab-pdf');
+            var imgTab  = document.getElementById('bottom-tab-img');
+
+            if (path === '/' || path === '') {
+                if (hash === '#image-tools-section') {
+                    imgTab && imgTab.classList.add('is-active');
+                } else {
+                    homeTab && homeTab.classList.add('is-active');
+                }
+            }
+
+            // Update active tab when scrolling between sections (homepage only)
+            if (path === '/' || path === '') {
+                var pdfSection = document.getElementById('pdf-tools-section');
+                var imgSection = document.getElementById('image-tools-section');
+                if (pdfSection && imgSection && window.IntersectionObserver) {
+                    var observer = new IntersectionObserver(function(entries) {
+                        entries.forEach(function(entry) {
+                            if (entry.isIntersecting) {
+                                homeTab && homeTab.classList.remove('is-active');
+                                pdfTab  && pdfTab.classList.remove('is-active');
+                                imgTab  && imgTab.classList.remove('is-active');
+                                if (entry.target.id === 'image-tools-section') {
+                                    imgTab && imgTab.classList.add('is-active');
+                                } else {
+                                    homeTab && homeTab.classList.add('is-active');
+                                }
+                            }
+                        });
+                    }, { threshold: 0.3 });
+                    observer.observe(pdfSection);
+                    observer.observe(imgSection);
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

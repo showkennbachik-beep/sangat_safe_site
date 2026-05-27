@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Our Story - SANGAT Tools{% endblock %}
+
+{% block content %}
+<div class="container page-container" style="max-width: 860px;">
+    <div class="header">
+        <h1>Our Story</h1>
+        <p>Why we built a safer way to work with documents.</p>
+    </div>
+
+    <div class="page-body">
+        <!-- Founder card with illustrated avatar (no photo) -->
+        <div style="display: flex; align-items: center; gap: 24px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; padding: 28px; margin-bottom: 36px; flex-wrap: wrap;">
+            <svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" aria-label="Founder avatar" style="flex-shrink: 0;">
+                <defs>
+                    <linearGradient id="avatarBg" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#4f46e5"/>
+                        <stop offset="100%" stop-color="#0d9488"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="48" cy="48" r="48" fill="url(#avatarBg)"/>
+                <circle cx="48" cy="40" r="16" fill="#fff" opacity="0.95"/>
+                <path d="M20 84 a28 28 0 0 1 56 0 Z" fill="#fff" opacity="0.95"/>
+            </svg>
+            <div style="flex: 1; min-width: 240px;">
+                <h3 style="color: var(--color-navy); margin-bottom: 4px;">A note from the founder</h3>
+                <p style="color: var(--color-text-muted); line-height: 1.6;">SANGAT began with a simple frustration: every "free" PDF tool online wanted your files, your email, and your trust — and gave little back. We wanted something that respected the person on the other side of the screen.</p>
+            </div>
+        </div>
+
+        <h2 style="color: var(--color-navy); margin-bottom: 12px;">How it started</h2>
+        <p style="color: var(--color-text-muted); line-height: 1.7; margin-bottom: 24px;">SANGAT Tools was built around one idea: working with documents should be fast, simple, and genuinely private. We started with a handful of tools — merge, split, compress — and grew it into a full suite of more than thirty document operations, all in one clean interface.</p>
+
+        <h2 style="color: var(--color-navy); margin-bottom: 12px;">What we believe</h2>
+        <div class="features-list">
+            <div class="feature-item">
+                <div class="icon">🛡️</div>
+                <div class="details">
+                    <h3>Privacy by default</h3>
+                    <p>Your files are yours. We process what you ask and nothing more.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🧭</div>
+                <div class="details">
+                    <h3>Honest by design</h3>
+                    <p>We tell you what works, what's coming, and what isn't ready yet.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🌱</div>
+                <div class="details">
+                    <h3>Built to grow</h3>
+                    <p>An open, evolving toolkit shaped by the people who use it.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="/features" class="submit-btn" style="display: inline-block; text-decoration: none; padding: 14px 32px;">Explore our features →</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

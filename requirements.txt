@@ -1,0 +1,64 @@
+# ============================================================
+# SANGAT Tools  —  Python dependencies
+# Install with:  pip install -r requirements.txt
+# Tested on Python 3.10 / 3.11 / 3.12
+# ============================================================
+
+# --- Core web framework ---
+Flask>=3.0.0
+Werkzeug>=3.0.0          # password hashing (ships with Flask, pinned for safety)
+
+# --- Production server (required for deployment) ---
+gunicorn>=21.2.0         # WSGI server — do NOT use Flask dev server in production
+
+# --- Environment & config ---
+python-dotenv>=1.0.0     # loads .env into os.environ on startup
+
+# --- Performance ---
+Flask-Compress>=1.15     # gzip/brotli response compression
+
+# --- Core PDF engine (used by most tools) ---
+PyMuPDF>=1.23.0          # imported as "fitz" — merge/split/rotate/crop/redact/etc.
+PyPDF2>=3.0.0            # merge, lock/unlock, page ops
+reportlab>=4.0.0         # page numbers, signatures, text overlays, PDF generation
+pdfplumber>=0.10.0       # text + table extraction
+pdf2docx>=0.5.6          # PDF -> Word
+Pillow>=10.0.0           # imported as "PIL" — image handling for img2pdf / scan2pdf
+
+# --- Office formats ---
+python-pptx>=0.6.21      # imported as "pptx" — PPT text extraction / PDF fallback
+python-docx>=1.1.0       # imported as "docx" — Word text extraction / PDF fallback
+pandas>=2.0.0            # Excel <-> PDF data handling
+openpyxl>=3.1.0          # Excel engine used by pandas for .xlsx
+
+# --- Extra features ---
+deep-translator>=1.11.0  # translate_pdf
+xhtml2pdf>=0.2.11        # html2pdf  (pure-python, cross-platform)
+
+# ============================================================
+# SYSTEM DEPENDENCY (NOT a pip package) — required for OCR
+# ------------------------------------------------------------
+# tools/ocr.py uses pytesseract, which needs the Tesseract binary:
+#   - Ubuntu/Debian:  sudo apt install tesseract-ocr tesseract-ocr-eng
+#   - macOS (brew):   brew install tesseract
+#   - Windows:        https://github.com/UB-Mannheim/tesseract/wiki
+# In Docker/Cloud: handled automatically in Dockerfile
+# ============================================================
+pytesseract>=0.3.10
+
+# ============================================================
+# OPTIONAL: Background removal (greatly improves Remove BG tool)
+# pip install rembg   — downloads ~168 MB model on first use
+# Not listed here to keep base install lean; add manually if needed
+# ============================================================
+
+# ============================================================
+# WINDOWS-ONLY  —  DO NOT install on Linux/macOS (will fail)
+# ------------------------------------------------------------
+# tools/word2pdf.py and tools/ppt2pdf.py use Microsoft Office via COM.
+# These ONLY work on Windows with MS Office installed.
+# Uncomment ONLY on Windows dev machines — NOT in production containers:
+# ------------------------------------------------------------
+# pywin32>=306            # provides win32com + pythoncom
+# docx2pdf>=0.1.8         # Word -> PDF via MS Word
+# ============================================================

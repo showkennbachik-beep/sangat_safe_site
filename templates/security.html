@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Security Compliance - SANGAT Tools{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px;">
+    <div class="header">
+        <h1>Security & Compliance</h1>
+        <p>Your documents are safe with us.</p>
+    </div>
+    <div class="page-body">
+        <p style="color: var(--color-text-muted); line-height: 1.7; margin-bottom: 30px;">We take security seriously. Our infrastructure and processes are designed to protect your most sensitive documents at every step.</p>
+
+        <div class="info-card">
+            <h3>🔐 Encryption Standards</h3>
+            <p><strong>In Transit:</strong> All data is encrypted using TLS 1.3<br><strong>At Rest:</strong> AES-256 encryption for all stored files<br><strong>Processing:</strong> Isolated, sandboxed containers per request</p>
+        </div>
+        <div class="info-card" style="border-left-color: var(--color-teal);">
+            <h3>🗑️ Auto-Deletion Policy</h3>
+            <p>All uploaded and processed files are automatically and permanently deleted within <strong>1 hour</strong> of processing. No copies, no backups, no exceptions.</p>
+        </div>
+        <div class="info-card" style="border-left-color: var(--color-navy);">
+            <h3>🏢 Infrastructure</h3>
+            <p>Our servers are hosted on SOC 2 Type II certified cloud infrastructure with 24/7 monitoring, DDoS protection, and automated vulnerability scanning.</p>
+        </div>
+        <div class="info-card">
+            <h3>📋 Compliance Frameworks</h3>
+            <p>We align our practices with the following standards:</p>
+            <ul style="margin-top: 10px; padding-left: 20px; color: var(--color-text-muted);">
+                <li>GDPR (General Data Protection Regulation)</li>
+                <li>CCPA (California Consumer Privacy Act)</li>
+                <li>SOC 2 Type II</li>
+                <li>ISO 27001 (in progress)</li>
+            </ul>
+        </div>
+        <div class="info-card" style="border-left-color: var(--color-teal);">
+            <h3>🐛 Responsible Disclosure</h3>
+            <p>Found a vulnerability? We run a responsible disclosure program. Report security issues to <strong style="color: var(--color-indigo);">pdfmy0782@gmail.com</strong> and we'll respond within 24 hours.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% block title %}Secure Checkout - SANGAT Tools{% endblock %}
+
+{% block head %}
+<style>
+.checkout-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+@media (max-width: 768px) {
+    .checkout-container {
+        flex-direction: column;
+        flex-direction: column-reverse;
+    }
+}
+.payment-section {
+    flex: 2;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+}
+.summary-section {
+    flex: 1;
+    background: var(--color-surface);
+    border: 1px solid var(--color-indigo);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.05);
+}
+.payment-methods {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.method-btn {
+    flex: 1;
+    padding: 15px;
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-navy);
+    transition: all 0.2s;
+    text-align: center;
+}
+.method-btn.active {
+    border-color: var(--color-indigo);
+    background: #eff6ff;
+    color: var(--color-indigo);
+}
+.method-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+.method-content.active {
+    display: block;
+}
+.input-row {
+    display: flex;
+    gap: 15px;
+}
+.instruction-box {
+    background: #f8fafc;
+    border-left: 4px solid var(--color-teal);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.instruction-box h4 {
+    margin-bottom: 10px;
+    color: var(--color-navy);
+}
+.phone-highlight {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-indigo);
+    letter-spacing: 2px;
+    margin: 10px 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1100px; background: transparent; border: none; box-shadow: none; padding: 20px;">
+    
+    <div class="header" style="text-align: left; margin-bottom: 30px;">
+        <h1>Secure <span class="highlight">Checkout</span></h1>
+        <p>Complete your upgrade to <strong style="color: var(--color-indigo);">SANGAT Tools Pro</strong></p>
+    </div>
+
+    <div class="checkout-container">
+        <!-- Payment Details -->
+        <div class="payment-section">
+            <h3 style="margin-bottom: 20px; color: var(--color-navy);">Payment Method</h3>
+            
+            <div class="payment-methods">
+                <div class="method-btn active" onclick="switchMethod('visa')">Visa / Mastercard</div>
+                <div class="method-btn" onclick="switchMethod('easypaisa')">Easypaisa</div>
+                <div class="method-btn" onclick="switchMethod('jazzcash')">JazzCash</div>
+            </div>
+
+            <!-- Visa Form Mockup -->
+            <form id="visa-form" class="method-content active" action="/process-payment" method="POST">
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Cardholder Name</label>
+                    <input type="text" required placeholder="John Doe" style="width: 100%; padding: 14px; border: 1px solid var(--color-border); border-radius: 8px;">
+                </div>
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Card Number</label>
+                    <input type="text" required placeholder="0000 0000 0000 0000" style="width: 100%; padding: 14px; border: 1px solid var(--color-border); border-radius: 8px;">
+                </div>
+                <div class="input-row" style="margin-bottom: 25px;">
+                    <div class="input-group" style="flex: 1;">
+                        <label style="display:block; margin-bottom: 8px; font-weight: 600;">Expiry Date</label>
+                        <input type="text" required placeholder="MM/YY" style="width: 100%; padding: 14px; border: 1px solid var(--color-border); border-radius: 8px;">
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label style="display:block; margin-bottom: 8px; font-weight: 600;">CVC</label>
+                        <input type="password" required placeholder="123" style="width: 100%; padding: 14px; border: 1px solid var(--color-border); border-radius: 8px;">
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn" style="width: 100%;">Pay $2.00 securely</button>
+            </form>
+
+            <!-- Easypaisa Form -->
+            <form id="easypaisa-form" class="method-content" action="/process-payment" method="POST">
+                <div class="instruction-box">
+                    <h4>Direct Transfer Instructions</h4>
+                    <p style="color: var(--color-text-muted); margin-bottom: 15px;">Please send the equivalent of <strong>800 Rupees</strong> via Easypaisa to the following mobile number:</p>
+                    <div class="phone-highlight">0311 828 0840</div>
+                    <p style="font-size: 0.85rem; color: #64748b; margin-top: 10px;">Once transferred, enter your Transaction ID (TID) below so we can verify and upgrade your account manually.</p>
+                </div>
+                <div class="input-group" style="margin-bottom: 25px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Easypaisa Transaction ID (TID)</label>
+                    <input type="text" name="tid" required placeholder="e.g. 12345678901" style="width: 100%; padding: 14px; border: 1px solid var(--color-border); border-radius: 8px;">
+                </div>
+                <button type="submit" class="submit-btn" style="width: 100%; background: #059669;">Verify Payment</button>
+            </form>
+
+            <!-- JazzCash Form -->
+            <form id="jazzcash-form" class="method-content" action="/process-payment" method="POST">
+                <div class="instruction-box" style="border-left-color: #e11d48;">
+                    <h4>Direct Transfer Instructions</h4>
+                    <p style="color: var(--color-text-muted); margin-bottom: 15px;">Please send the equivalent of <strong>800 Rupees</strong> via JazzCash to the following mobile number:</p>
+                    <div class="phone-highlight" style="color: #e11d48;">0320 716 9716</div>
+                    <p style="font-size: 0.85rem; color: #64748b; margin-top: 10px;">Once transferred, enter your Transaction ID (TID) below so we can verify and upgrade your account manually.</p>
+                </div>
+                <div class="input-group" style="margin-bottom: 25px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">JazzCash Transaction ID (TID)</label>
+                    <input type="text" name="tid" required placeholder="e.g. 12345678901" style="width: 100%; padding: 14px; border: 1px solid var(--color-border); border-radius: 8px;">
+                </div>
+                <button type="submit" class="submit-btn" style="width: 100%; background: #e11d48;">Verify Payment</button>
+            </form>
+
+        </div>
+
+        <!-- Order Summary -->
+        <div class="summary-section">
+            <h3 style="margin-bottom: 20px; color: var(--color-navy); padding-bottom: 15px; border-bottom: 1px solid var(--color-border);">Order Summary</h3>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                <span style="font-weight: 600; color: var(--color-navy);">SANGAT Tools Pro (1 Month)</span>
+                <span style="font-weight: 600;">$2.00</span>
+            </div>
+            
+            <ul style="list-style:none; margin: 20px 0; padding:0; color: var(--color-text-muted); font-size: 0.9rem;">
+                <li style="margin-bottom: 8px;">✓ Unlimited conversions</li>
+                <li style="margin-bottom: 8px;">✓ Max 100 MB per file</li>
+                <li style="margin-bottom: 8px;">✓ API access (10K req/mo)</li>
+            </ul>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-border); font-size: 1.2rem; font-weight: 800;">
+                <span>Total</span>
+                <span>$2.00</span>
+            </div>
+            <div style="text-align: center; margin-top: 20px; font-size: 0.8rem; color: #94a3b8;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Secure 256-bit SSL encryption
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function switchMethod(method) {
+    // Update tabs
+    document.querySelectorAll('.method-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Update forms
+    document.querySelectorAll('.method-content').forEach(form => form.classList.remove('active'));
+    document.getElementById(method + '-form').classList.add('active');
+}
+</script>
+{% endblock %}

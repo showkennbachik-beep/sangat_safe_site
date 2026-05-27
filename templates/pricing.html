@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block title %}Pricing - SANGAT Tools{% endblock %}
+{% block head %}
+<style>
+.pricing-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: stretch;
+}
+.pricing-card {
+    flex: 1;
+    min-width: 250px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+.pricing-card:hover {
+    transform: translateY(-5px);
+}
+.pricing-card.featured {
+    border-color: var(--color-indigo);
+    border-width: 2px;
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.15);
+    transform: scale(1.02);
+}
+.pricing-card.featured:hover {
+    transform: scale(1.02) translateY(-5px);
+}
+.pricing-badge {
+    background: #e2e8f0;
+    color: var(--color-navy);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 20px;
+}
+.pricing-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 20px;
+}
+.pricing-price span {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    flex: 1;
+}
+.pricing-features li {
+    margin-bottom: 12px;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px;">
+    <div class="header">
+        <h1>Simple, <span class="highlight">Transparent</span> Pricing</h1>
+        <p>Choose the plan that fits your <strong style="color: var(--color-indigo);">workflow</strong>.</p>
+    </div>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <div class="pricing-badge">Free</div>
+            <div class="pricing-price">$0<span>/mo</span></div>
+            <ul class="pricing-features">
+                <li>✓ 5 file conversions/day</li>
+                <li>✓ Max 10 MB per file</li>
+                <li>✓ All 21 tools included</li>
+                <li>✓ Standard processing speed</li>
+                <li>✗ No API access</li>
+            </ul>
+            <a href="/signup" class="submit-btn" style="text-align:center; text-decoration:none; display:block;">Get Started Free</a>
+        </div>
+        <div class="pricing-card featured" style="transform: scale(1);">
+            <div class="pricing-badge" style="background: var(--color-indigo); color: #fff;">Pro Monthly</div>
+            <div class="pricing-price">$2<span>/mo</span></div>
+            <ul class="pricing-features">
+                <li>✓ Unlimited conversions</li>
+                <li>✓ Max 100 MB per file</li>
+                <li>✓ All 21 tools included</li>
+                <li>✓ Priority processing speed</li>
+                <li>✓ API access (10K req/mo)</li>
+                <li>✓ Email support</li>
+            </ul>
+            <a href="/checkout" class="submit-btn" style="text-align:center; text-decoration:none; display:block;">Upgrade Monthly</a>
+        </div>
+        <div class="pricing-card featured">
+            <div class="pricing-badge" style="background: #0d9488; color: #fff;">Pro Yearly — Best Value</div>
+            <div class="pricing-price">$35<span>/yr</span></div>
+            <ul class="pricing-features">
+                <li>✓ Unlimited conversions</li>
+                <li>✓ Max 100 MB per file</li>
+                <li>✓ All 21 tools included</li>
+                <li>✓ Priority processing speed</li>
+                <li>✓ API access (10K req/mo)</li>
+                <li>✓ Email support</li>
+            </ul>
+            <a href="/checkout" class="submit-btn" style="text-align:center; text-decoration:none; display:block; background: #0d9488;">Upgrade Yearly</a>
+        </div>
+        <div class="pricing-card">
+            <div class="pricing-badge" style="background: var(--color-navy); color: #fff;">Enterprise</div>
+            <div class="pricing-price">Custom</div>
+            <ul class="pricing-features">
+                <li>✓ <strong>Everything in Pro</strong></li>
+                <li>✓ <strong>Unlimited</strong> file size</li>
+                <li>✓ <strong>Unlimited</strong> API requests</li>
+                <li>✓ Dedicated infrastructure</li>
+                <li>✓ SLA guarantee (99.9%)</li>
+                <li>✓ <strong style="color: var(--color-navy);">Priority</strong> phone support</li>
+            </ul>
+            <a href="/contact" class="submit-btn" style="text-align:center; text-decoration:none; display:block; background: var(--color-navy);">Contact Sales</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

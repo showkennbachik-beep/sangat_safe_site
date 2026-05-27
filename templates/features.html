@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Features - SANGAT Tools{% endblock %}
+
+{% block content %}
+<div class="container page-container" style="max-width: 1000px;">
+    <div class="header">
+        <h1>Features</h1>
+        <p>Everything SANGAT Tools can do, in one place.</p>
+    </div>
+
+    <div class="page-body">
+        <div class="tools-grid" style="margin-top: 10px;">
+            <div class="tool-card" style="cursor: default;">
+                <div class="icon">📂</div>
+                <h3>Organize</h3>
+                <p>Merge, split, reorder, remove and extract pages.</p>
+            </div>
+            <div class="tool-card" style="cursor: default;">
+                <div class="icon">🗜️</div>
+                <h3>Optimize</h3>
+                <p>Compress, repair, OCR and clean up your PDFs.</p>
+            </div>
+            <div class="tool-card" style="cursor: default;">
+                <div class="icon">🔄</div>
+                <h3>Convert</h3>
+                <p>To and from Word, Excel, PowerPoint, JPG and HTML.</p>
+            </div>
+            <div class="tool-card" style="cursor: default;">
+                <div class="icon">🔒</div>
+                <h3>Secure</h3>
+                <p>Lock, unlock, redact, watermark and sign documents.</p>
+            </div>
+            <div class="tool-card" style="cursor: default;">
+                <div class="icon">✏️</div>
+                <h3>Edit</h3>
+                <p>Rotate, crop, add page numbers, and place text.</p>
+            </div>
+            <div class="tool-card" style="cursor: default;">
+                <div class="icon">🧠</div>
+                <h3>Smart tools</h3>
+                <p>Summarize, translate and compare PDFs.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 44px;">
+            <h2 style="color: var(--color-navy); margin-bottom: 16px;">Why people choose SANGAT</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="icon">⚡</div>
+                    <div class="details">
+                        <h3>Fast</h3>
+                        <p>Upload, process, download. No bloated steps in between.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🌍</div>
+                    <div class="details">
+                        <h3>Works in your language</h3>
+                        <p>Built-in translation across the whole interface.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🌓</div>
+                    <div class="details">
+                        <h3>Light &amp; dark mode</h3>
+                        <p>Comfortable to use day or night.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="/" class="submit-btn" style="display: inline-block; text-decoration: none; padding: 14px 32px;">Try the tools →</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

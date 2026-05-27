@@ -1,0 +1,49 @@
+# .gcloudignore — files excluded from `gcloud app deploy` and `gcloud run deploy`
+# Syntax is identical to .gitignore.
+
+# Secrets — never upload
+.env
+*.env
+config.local.py
+
+# User-uploaded and generated files
+static/uploads/*
+!static/uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep
+
+# Database (user data stays local / use Cloud SQL in production)
+*.db
+*.sqlite
+*.sqlite3
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Dev / IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+.pytest_cache/
+
+# Local Docker build artifacts
+.dockerignore
+
+# Git internals
+.git/
+
+# Windows-specific dev tools
+*.bat

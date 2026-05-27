@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}API &amp; Services - SANGAT Tools{% endblock %}
+
+{% block head %}
+<style>
+    .api-status { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; background: #fef3c7; color: #92400e; margin-left: 10px; }
+    .endpoint-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .endpoint-table th, .endpoint-table td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--color-border); font-size: 0.9rem; }
+    .endpoint-table th { color: var(--color-navy); font-weight: 700; }
+    .endpoint-table td code { background: var(--color-bg); padding: 2px 8px; border-radius: 6px; color: var(--color-indigo); font-size: 0.85rem; }
+    .method { font-weight: 700; color: var(--color-teal); font-size: 0.8rem; }
+    .svc-group { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 22px; margin-bottom: 22px; }
+    .svc-group h3 { color: var(--color-navy); margin-bottom: 6px; }
+    .code-block { background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 16px 0; }
+    .code-block pre { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container page-container" style="max-width: 920px;">
+    <div class="header">
+        <h1>API &amp; Services</h1>
+        <p>Every SANGAT tool, and how they're organized.</p>
+    </div>
+
+    <div class="page-body">
+        <div class="svc-group" style="border-left: 4px solid var(--color-teal);">
+            <h3>Developer API <span class="api-status">In development</span></h3>
+            <p style="color: var(--color-text-muted); line-height: 1.6;">A public REST API with API keys and client libraries is planned. It isn't live yet &mdash; we'd rather ship it properly than promise endpoints that don't exist. Want early access? <a href="/contact" style="color: var(--color-indigo); font-weight: 600;">Let us know.</a></p>
+        </div>
+
+        <h2 style="color: var(--color-navy); margin: 28px 0 8px;">Available services</h2>
+        <p style="color: var(--color-text-muted); margin-bottom: 8px;">These are the operations SANGAT can perform today, grouped by category. Each runs as a form-based upload in the app.</p>
+
+        <div class="svc-group">
+            <h3>&#128194; Organize</h3>
+            <table class="endpoint-table">
+                <tr><th>Operation</th><th>Route</th></tr>
+                <tr><td>Merge PDFs</td><td><span class="method">POST</span> <code>/merge</code></td></tr>
+                <tr><td>Split PDF</td><td><span class="method">POST</span> <code>/split</code></td></tr>
+                <tr><td>Organize pages</td><td><span class="method">POST</span> <code>/organize</code></td></tr>
+                <tr><td>Remove pages</td><td><span class="method">POST</span> <code>/remove-pages</code></td></tr>
+                <tr><td>Extract pages</td><td><span class="method">POST</span> <code>/extract-pages</code></td></tr>
+            </table>
+        </div>
+
+        <div class="svc-group">
+            <h3>&#129507; Optimize</h3>
+            <table class="endpoint-table">
+                <tr><th>Operation</th><th>Route</th></tr>
+                <tr><td>Compress</td><td><span class="method">POST</span> <code>/compress</code></td></tr>
+                <tr><td>Optimize</td><td><span class="method">POST</span> <code>/optimize</code></td></tr>
+                <tr><td>Repair</td><td><span class="method">POST</span> <code>/repair</code></td></tr>
+                <tr><td>OCR</td><td><span class="method">POST</span> <code>/ocr</code></td></tr>
+                <tr><td>Scan to PDF</td><td><span class="method">POST</span> <code>/scan2pdf</code></td></tr>
+            </table>
+        </div>
+
+        <div class="svc-group">
+            <h3>&#128260; Convert</h3>
+            <table class="endpoint-table">
+                <tr><th>Operation</th><th>Route</th></tr>
+                <tr><td>Word to/from PDF</td><td><span class="method">POST</span> <code>/word2pdf</code> &middot; <code>/pdf2word</code></td></tr>
+                <tr><td>Excel to/from PDF</td><td><span class="method">POST</span> <code>/excel2pdf</code> &middot; <code>/pdf2excel</code></td></tr>
+                <tr><td>PowerPoint to/from PDF</td><td><span class="method">POST</span> <code>/ppt2pdf</code> &middot; <code>/pdf2ppt</code></td></tr>
+                <tr><td>Images / JPG to/from PDF</td><td><span class="method">POST</span> <code>/img2pdf</code> &middot; <code>/pdf2jpg</code></td></tr>
+                <tr><td>HTML to PDF</td><td><span class="method">POST</span> <code>/html2pdf</code></td></tr>
+                <tr><td>PDF to text / PDF/A</td><td><span class="method">POST</span> <code>/convert</code> &middot; <code>/pdf2pdfa</code></td></tr>
+            </table>
+        </div>
+
+        <div class="svc-group">
+            <h3>&#128274; Secure &amp; edit</h3>
+            <table class="endpoint-table">
+                <tr><th>Operation</th><th>Route</th></tr>
+                <tr><td>Lock / unlock</td><td><span class="method">POST</span> <code>/lock</code> &middot; <code>/unlock</code></td></tr>
+                <tr><td>Redact / watermark</td><td><span class="method">POST</span> <code>/redact</code> &middot; <code>/watermark</code></td></tr>
+                <tr><td>Sign</td><td><span class="method">POST</span> <code>/sign</code></td></tr>
+                <tr><td>Rotate / crop</td><td><span class="method">POST</span> <code>/rotate</code> &middot; <code>/crop</code></td></tr>
+                <tr><td>Page numbers / edit text</td><td><span class="method">POST</span> <code>/pagenumbers</code> &middot; <code>/edit</code></td></tr>
+                <tr><td>Flatten forms</td><td><span class="method">POST</span> <code>/pdf-forms</code></td></tr>
+            </table>
+        </div>
+
+        <div class="svc-group">
+            <h3>&#129504; Smart tools</h3>
+            <table class="endpoint-table">
+                <tr><th>Operation</th><th>Route</th></tr>
+                <tr><td>Summarize</td><td><span class="method">POST</span> <code>/summarize</code></td></tr>
+                <tr><td>Translate</td><td><span class="method">POST</span> <code>/translate</code></td></tr>
+                <tr><td>Compare</td><td><span class="method">POST</span> <code>/compare</code></td></tr>
+            </table>
+        </div>
+
+        <h2 style="color: var(--color-navy); margin: 28px 0 8px;">When the API ships</h2>
+        <p style="color: var(--color-text-muted); margin-bottom: 4px;">Here's the shape we're aiming for &mdash; a simple authenticated POST per tool:</p>
+        <div class="code-block">
+<pre><code>import requests
+
+# NOTE: example of the planned API - not live yet
+url = "https://api.sangat.example/v1/merge"
+files = [
+    ("pdfs", open("file1.pdf", "rb")),
+    ("pdfs", open("file2.pdf", "rb")),
+]
+headers = {"Authorization": "Bearer YOUR_API_KEY"}
+
+response = requests.post(url, files=files, headers=headers)
+with open("merged.pdf", "wb") as f:
+    f.write(response.content)</code></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}

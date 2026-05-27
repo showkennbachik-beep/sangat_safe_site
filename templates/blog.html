@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Blog - SANGAT Tools{% endblock %}
+
+{% block content %}
+<div class="container page-container" style="max-width: 900px;">
+    <div class="header">
+        <h1>Blog</h1>
+        <p>Tips, updates, and thinking on documents and privacy.</p>
+    </div>
+
+    <div class="page-body">
+        <div style="display: grid; gap: 20px;">
+            <article style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 24px;">
+                <div style="font-size: 0.8rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Privacy</div>
+                <h3 style="color: var(--color-navy); margin: 8px 0;">What "your files stay yours" actually means</h3>
+                <p style="color: var(--color-text-muted); line-height: 1.6;">A plain-language look at how document tools handle your uploads — and the questions worth asking before you trust any of them.</p>
+                <div style="margin-top: 12px; font-size: 0.85rem; color: var(--color-text-muted);">Coming soon</div>
+            </article>
+
+            <article style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 24px;">
+                <div style="font-size: 0.8rem; color: var(--color-indigo); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Guides</div>
+                <h3 style="color: var(--color-navy); margin: 8px 0;">Merging and splitting PDFs the right way</h3>
+                <p style="color: var(--color-text-muted); line-height: 1.6;">A quick walkthrough of the most common document tasks and how to do them cleanly.</p>
+                <div style="margin-top: 12px; font-size: 0.85rem; color: var(--color-text-muted);">Coming soon</div>
+            </article>
+
+            <article style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 24px;">
+                <div style="font-size: 0.8rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Product</div>
+                <h3 style="color: var(--color-navy); margin: 8px 0;">Building SANGAT in the open</h3>
+                <p style="color: var(--color-text-muted); line-height: 1.6;">Notes on building a document toolkit as an open, public project — and what that means for you.</p>
+                <div style="margin-top: 12px; font-size: 0.85rem; color: var(--color-text-muted);">Coming soon</div>
+            </article>
+        </div>
+
+        <div style="text-align: center; margin-top: 36px; color: var(--color-text-muted);">
+            <p>More posts are on the way. Want us to write about something? <a href="/contact" style="color: var(--color-indigo); font-weight: 600;">Tell us.</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

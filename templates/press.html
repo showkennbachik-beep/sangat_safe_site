@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Press - SANGAT Tools{% endblock %}
+
+{% block content %}
+<div class="container page-container" style="max-width: 860px;">
+    <div class="header">
+        <h1>Press</h1>
+        <p>Media resources and how to reach us.</p>
+    </div>
+
+    <div class="page-body">
+        <h2 style="color: var(--color-navy); margin-bottom: 12px;">About SANGAT Tools</h2>
+        <p style="color: var(--color-text-muted); line-height: 1.7; margin-bottom: 28px;">SANGAT Tools is a document toolkit offering more than thirty PDF operations — merging, converting, securing, and more — through one clean, privacy-minded interface. The project is built in the open.</p>
+
+        <h2 style="color: var(--color-navy); margin-bottom: 12px;">Press &amp; media enquiries</h2>
+        <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 24px; margin-bottom: 28px;">
+            <p style="color: var(--color-text-muted); line-height: 1.6;">For interviews, quotes, or questions, reach us at:</p>
+            <p style="margin-top: 8px;"><a href="/contact" style="color: var(--color-indigo); font-weight: 700;">Contact our team →</a></p>
+        </div>
+
+        <h2 style="color: var(--color-navy); margin-bottom: 12px;">Brand assets</h2>
+        <p style="color: var(--color-text-muted); line-height: 1.6; margin-bottom: 16px;">Please use the SANGAT name and logo as shown below. Don't alter the colors or stretch the mark.</p>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+            <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 24px; display: flex; align-items: center; gap: 12px;">
+                <svg width="40" height="40" viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" aria-label="Sangat logo">
+                    <defs><linearGradient id="pressBadge" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#0d9488"/></linearGradient></defs>
+                    <path d="M9 2 H31 L45 16 V43 a2 2 0 0 1 -2 2 H9 a2 2 0 0 1 -2 -2 V4 a2 2 0 0 1 2 -2 Z" fill="url(#pressBadge)"/>
+                    <path d="M31 2 V16 H45" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round" opacity="0.55"/>
+                    <path d="M31 27 H19 a4 4 0 0 0 0 8 h6 a4 4 0 0 1 0 8 H15" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span style="font-weight: 800; font-size: 1.3rem; color: var(--color-navy); letter-spacing: -0.5px;">SANGAT <span style="color: var(--color-indigo); font-weight: 300;">Tools</span></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

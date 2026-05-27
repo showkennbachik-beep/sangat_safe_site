@@ -1,0 +1,55 @@
+# ============================================================
+# SANGAT P.D.F  —  .gitignore
+# Keeps secrets, user data, and junk OUT of your public repo.
+# ============================================================
+
+# --- SECRETS / CONFIG (never commit these) ---
+.env
+*.env
+config.local.py
+
+# --- USER DATABASE (contains password hashes — do NOT publish) ---
+users.db
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Uploaded + generated files (user content, not source code) ---
+static/uploads/*
+!static/uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# --- Virtual environments ---
+venv/
+env/
+.venv/
+ENV/
+
+# --- IDE / OS junk ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# --- Deployment / Cloud ---
+.dockerignore
+
+# --- Test / coverage ---
+.pytest_cache/
+htmlcov/
+.coverage
+*.cover
+
+# --- Logs ---
+*.log
+logs/

@@ -1,0 +1,1368 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="width: 100%; max-width: 1100px; margin: 0 auto;">
+    <div class="container" style="margin-bottom: 30px; text-align: center; border-radius: 16px;">
+        <h1 style="font-size: 2.6rem; font-weight: 800; color: var(--color-navy); margin-bottom: 10px; letter-spacing: -1px;">Ultimate <span class="highlight">PDF</span> Toolkit</h1>
+        <p style="color: var(--color-text-muted); font-size: var(--text-lg);">Professional, <strong style="color: var(--color-indigo);">fast</strong>, and <span class="highlight-teal">secure</span> document manipulation.</p>
+    </div>
+
+    <!-- Category 1: 📂 Organize PDF (border-indigo) -->
+    <div id="pdf-tools-section" class="category-section border-indigo">
+        <div class="category-header">
+            <h2>📂 Organize PDF <span class="category-count">5 tools</span></h2>
+            <p>Rearrange, merge, split, and manage your PDF pages</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card active" data-target="organize-form">
+                <div class="icon">📑</div>
+                <h3>Organize</h3>
+                <p>Sort Pages</p>
+            </div>
+            <div class="tool-card" data-target="merge-form">
+                <div class="icon">🔗</div>
+                <h3>Merge</h3>
+                <p>Combine Files</p>
+            </div>
+            <div class="tool-card" data-target="split-form">
+                <div class="icon">✂️</div>
+                <h3>Split</h3>
+                <p>Extract Pages</p>
+            </div>
+            <div class="tool-card" data-target="removepages-form">
+                <div class="icon">🗑️</div>
+                <h3>Remove Pages</h3>
+                <p>Delete Pages</p>
+            </div>
+            <div class="tool-card" data-target="extractpages-form">
+                <div class="icon">📤</div>
+                <h3>Extract Pages</h3>
+                <p>Pull Pages</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 2: 📥 Optimize PDF (border-slate) -->
+    <div class="category-section border-slate">
+        <div class="category-header">
+            <h2>📥 Optimize PDF <span class="category-count">5 tools</span></h2>
+            <p>Scan, optimize, compress, repair, and OCR your documents</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card" data-target="scan2pdf-form">
+                <div class="icon">📷</div>
+                <h3>Scan to PDF</h3>
+                <p>Images to PDF</p>
+            </div>
+            <div class="tool-card" data-target="optimize-form">
+                <div class="icon">⚡</div>
+                <h3>Optimize</h3>
+                <p>Enhance PDF</p>
+            </div>
+            <div class="tool-card" data-target="compress-form">
+                <div class="icon">🗜️</div>
+                <h3>Compress</h3>
+                <p>Reduce Size</p>
+            </div>
+            <div class="tool-card" data-target="repair-form">
+                <div class="icon">🛠️</div>
+                <h3>Repair</h3>
+                <p>Fix Files</p>
+            </div>
+            <div class="tool-card" data-target="ocr-form">
+                <div class="icon">🔍</div>
+                <h3>OCR PDF</h3>
+                <p>Recognize Text</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 3: ➡️ Convert to PDF (border-teal) -->
+    <div class="category-section border-teal">
+        <div class="category-header">
+            <h2>➡️ Convert to PDF <span class="category-count">5 tools</span></h2>
+            <p>Convert images, documents, and web pages into PDF format</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card" data-target="img2pdf-form">
+                <div class="icon">🖼️</div>
+                <h3>JPG to PDF</h3>
+                <p>Images to PDF</p>
+            </div>
+            <div class="tool-card" data-target="word2pdf-form">
+                <div class="icon">📝</div>
+                <h3>Word to PDF</h3>
+                <p>DOCX to PDF</p>
+            </div>
+            <div class="tool-card" data-target="ppt2pdf-form">
+                <div class="icon">📽️</div>
+                <h3>PPT to PDF</h3>
+                <p>Slides to PDF</p>
+            </div>
+            <div class="tool-card" data-target="excel2pdf-form">
+                <div class="icon">📊</div>
+                <h3>Excel to PDF</h3>
+                <p>XLSX to PDF</p>
+            </div>
+            <div class="tool-card" data-target="html2pdf-form">
+                <div class="icon">🌐</div>
+                <h3>HTML to PDF</h3>
+                <p>Web to PDF</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 4: ⬅️ Convert from PDF (border-emerald) -->
+    <div class="category-section border-emerald">
+        <div class="category-header">
+            <h2>⬅️ Convert from PDF <span class="category-count">6 tools</span></h2>
+            <p>Extract content from PDFs into other formats</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card" data-target="pdf2jpg-form">
+                <div class="icon">🖼️</div>
+                <h3>PDF to JPG</h3>
+                <p>Extract Images</p>
+            </div>
+            <div class="tool-card" data-target="pdf2word-form">
+                <div class="icon">📝</div>
+                <h3>PDF to Word</h3>
+                <p>To DOCX</p>
+            </div>
+            <div class="tool-card" data-target="pdf2ppt-form">
+                <div class="icon">📽️</div>
+                <h3>PDF to PPT</h3>
+                <p>To PPTX</p>
+            </div>
+            <div class="tool-card" data-target="pdf2excel-form">
+                <div class="icon">📈</div>
+                <h3>PDF to Excel</h3>
+                <p>Extract Tables</p>
+            </div>
+            <div class="tool-card" data-target="pdf2pdfa-form">
+                <div class="icon">📋</div>
+                <h3>PDF to PDF/A</h3>
+                <p>Archive Format</p>
+            </div>
+            <div class="tool-card" data-target="convert-form">
+                <div class="icon">📄</div>
+                <h3>PDF to Text</h3>
+                <p>Extract Text</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 5: ✏️ Edit PDF (border-amber) -->
+    <div class="category-section border-amber">
+        <div class="category-header">
+            <h2>✏️ Edit PDF <span class="category-count">6 tools</span></h2>
+            <p>Rotate, number, watermark, crop, and edit your documents</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card" data-target="rotate-form">
+                <div class="icon">🔄</div>
+                <h3>Rotate</h3>
+                <p>Turn Pages</p>
+            </div>
+            <div class="tool-card" data-target="pagenumbers-form">
+                <div class="icon">🔢</div>
+                <h3>Page Numbers</h3>
+                <p>Add Numbers</p>
+            </div>
+            <div class="tool-card" data-target="watermark-form">
+                <div class="icon">💧</div>
+                <h3>Watermark</h3>
+                <p>Stamp PDF</p>
+            </div>
+            <div class="tool-card" data-target="crop-form">
+                <div class="icon">✂️</div>
+                <h3>Crop</h3>
+                <p>Crop Margins</p>
+            </div>
+            <div class="tool-card" data-target="edit-form">
+                <div class="icon">✏️</div>
+                <h3>Edit PDF</h3>
+                <p>Add Text</p>
+            </div>
+            <div class="tool-card" data-target="pdfforms-form">
+                <div class="icon">📋</div>
+                <h3>PDF Forms</h3>
+                <p>Flatten Forms</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 6: 🔒 PDF Security (border-rose) -->
+    <div class="category-section border-rose">
+        <div class="category-header">
+            <h2>🔒 PDF Security <span class="category-count">5 tools</span></h2>
+            <p>Protect, unlock, sign, redact, and compare your documents</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card" data-target="unlock-form">
+                <div class="icon">🔓</div>
+                <h3>Unlock</h3>
+                <p>Remove Pass</p>
+            </div>
+            <div class="tool-card" data-target="lock-form">
+                <div class="icon">🔒</div>
+                <h3>Protect</h3>
+                <p>Add Password</p>
+            </div>
+            <div class="tool-card" data-target="sign-form">
+                <div class="icon">✍️</div>
+                <h3>Sign PDF</h3>
+                <p>Add Signature</p>
+            </div>
+            <div class="tool-card" data-target="redact-form">
+                <div class="icon">⬛</div>
+                <h3>Redact</h3>
+                <p>Blackout Text</p>
+            </div>
+            <div class="tool-card" data-target="compare-form">
+                <div class="icon">🔀</div>
+                <h3>Compare</h3>
+                <p>Diff PDFs</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 7: 🧠 PDF Intelligence (border-violet) -->
+    <div class="category-section border-violet">
+        <div class="category-header">
+            <h2>🧠 PDF Intelligence <span class="category-count">2 tools</span></h2>
+            <p>AI-powered summarization and translation</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card" data-target="summarize-form">
+                <div class="icon">🤖</div>
+                <h3>AI Summarizer</h3>
+                <p>Smart Summary</p>
+            </div>
+            <div class="tool-card" data-target="translate-form">
+                <div class="icon">🌍</div>
+                <h3>Translate PDF</h3>
+                <p>Multi-Language</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- IMAGE TOOLS SECTION HEADER                 -->
+    <!-- ============================================ -->
+    <div id="image-tools-section" class="container" style="margin-bottom: 30px; text-align: center; border-radius: 16px;">
+        <h1 class="section-title-gradient">Ultimate Image Toolkit</h1>
+        <p style="color: var(--color-text-muted); font-size: var(--text-lg); margin-top: 10px;">Professional, <strong style="color: var(--color-indigo);">instant</strong>, and <span class="highlight-teal">lossless</span> image processing.</p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- CATEGORY 8: 🖼️ Image Tools (border-pink)  -->
+    <!-- ============================================ -->
+    <div class="category-section border-pink">
+        <div class="category-header">
+            <h2>🖼️ Image Tools <span class="category-count">20 tools</span></h2>
+            <p>Resize, convert, edit, and enhance your images — no software needed</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card" data-target="img-resize-form">
+                <div class="icon">📐</div>
+                <h3>Resize</h3>
+                <p>Custom Dimensions</p>
+            </div>
+            <div class="tool-card" data-target="img-compress-form">
+                <div class="icon">🗜️</div>
+                <h3>Compress</h3>
+                <p>Reduce File Size</p>
+            </div>
+            <div class="tool-card" data-target="img-rembg-form">
+                <div class="icon">✂️</div>
+                <h3>Remove BG</h3>
+                <p>Background Remover</p>
+            </div>
+            <div class="tool-card" data-target="img-jpg2png-form">
+                <div class="icon">🔄</div>
+                <h3>JPG → PNG</h3>
+                <p>Lossless Convert</p>
+            </div>
+            <div class="tool-card" data-target="img-png2jpg-form">
+                <div class="icon">🔄</div>
+                <h3>PNG → JPG</h3>
+                <p>Flatten &amp; Convert</p>
+            </div>
+            <div class="tool-card" data-target="img-crop-form">
+                <div class="icon">✂️</div>
+                <h3>Crop</h3>
+                <p>Trim Image</p>
+            </div>
+            <div class="tool-card" data-target="img-rotate-form">
+                <div class="icon">🔃</div>
+                <h3>Rotate</h3>
+                <p>Any Angle</p>
+            </div>
+            <div class="tool-card" data-target="img-flip-form">
+                <div class="icon">↔️</div>
+                <h3>Flip</h3>
+                <p>Mirror Image</p>
+            </div>
+            <div class="tool-card" data-target="img-watermark-form">
+                <div class="icon">💧</div>
+                <h3>Watermark</h3>
+                <p>Add Text Stamp</p>
+            </div>
+            <div class="tool-card" data-target="img-blur-form">
+                <div class="icon">🌫️</div>
+                <h3>Blur</h3>
+                <p>Gaussian Blur</p>
+            </div>
+            <div class="tool-card" data-target="img-brightness-form">
+                <div class="icon">☀️</div>
+                <h3>Brightness</h3>
+                <p>Adjust Light</p>
+            </div>
+            <div class="tool-card" data-target="img-contrast-form">
+                <div class="icon">🔆</div>
+                <h3>Contrast</h3>
+                <p>Adjust Contrast</p>
+            </div>
+            <div class="tool-card" data-target="img-sharpen-form">
+                <div class="icon">🔬</div>
+                <h3>Sharpen</h3>
+                <p>Crisp Details</p>
+            </div>
+            <div class="tool-card" data-target="img-grayscale-form">
+                <div class="icon">🩶</div>
+                <h3>Grayscale</h3>
+                <p>Black &amp; White</p>
+            </div>
+            <div class="tool-card" data-target="img-to-pdf-form">
+                <div class="icon">📄</div>
+                <h3>Image → PDF</h3>
+                <p>Multi-Image PDF</p>
+            </div>
+            <div class="tool-card" data-target="img-from-pdf-form">
+                <div class="icon">🖼️</div>
+                <h3>PDF → Image</h3>
+                <p>Pages to PNG ZIP</p>
+            </div>
+            <div class="tool-card" data-target="img-meme-form">
+                <div class="icon">😂</div>
+                <h3>Meme Generator</h3>
+                <p>Add Top/Bottom Text</p>
+            </div>
+            <div class="tool-card" data-target="img-enhance-form">
+                <div class="icon">✨</div>
+                <h3>AI Enhancer</h3>
+                <p>Upscale &amp; Sharpen</p>
+            </div>
+            <div class="tool-card" data-target="img-colors-form">
+                <div class="icon">🎨</div>
+                <h3>Color Picker</h3>
+                <p>Dominant Colors</p>
+            </div>
+            <div class="tool-card" data-target="img-format-form">
+                <div class="icon">🔀</div>
+                <h3>Format Convert</h3>
+                <p>PNG/JPG/WEBP/BMP</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Central Forms Container -->
+    <div class="forms-container" style="background: var(--color-surface); margin-bottom: 40px; box-shadow: 0 10px 20px -10px rgba(0,0,0,0.05);">
+
+        <!-- ORGANIZE FORM -->
+        <form id="organize-form" action="/organize" method="POST" enctype="multipart/form-data" class="upload-form active-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="organize-pdf" required accept=".pdf" class="file-input">
+                <label for="organize-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">📑</div>
+                    <span>Select PDF</span>
+                </label>
+            </div>
+            <input type="text" name="pages" required placeholder="Pages to keep (e.g. 1,3,5-7)">
+            <button type="submit" class="submit-btn">Organize PDF</button>
+        </form>
+
+        <!-- MERGE FORM -->
+        <form id="merge-form" action="/merge" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdfs" id="merge-pdfs" multiple required accept=".pdf" class="file-input">
+                <label for="merge-pdfs" class="file-label">
+                    <div class="upload-icon-wrapper">🔗</div>
+                    <span>Select Multiple PDFs to Merge</span>
+                    <span class="file-hint">Hold Ctrl to select multiple</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Merge Files</button>
+        </form>
+
+        <!-- SPLIT FORM -->
+        <form id="split-form" action="/split" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="split-pdf" required accept=".pdf" class="file-input">
+                <label for="split-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">✂️</div>
+                    <span>Select PDF to Split</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Extract Pages to ZIP</button>
+        </form>
+
+        <!-- REMOVE PAGES FORM -->
+        <form id="removepages-form" action="/remove-pages" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="removepages-pdf" required accept=".pdf" class="file-input">
+                <label for="removepages-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🗑️</div>
+                    <span>Select PDF</span>
+                </label>
+            </div>
+            <input type="text" name="pages" required placeholder="Pages to remove (e.g. 2,4,6-8)">
+            <button type="submit" class="submit-btn">Remove Pages</button>
+        </form>
+
+        <!-- EXTRACT PAGES FORM -->
+        <form id="extractpages-form" action="/extract-pages" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="extractpages-pdf" required accept=".pdf" class="file-input">
+                <label for="extractpages-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">📤</div>
+                    <span>Select PDF</span>
+                </label>
+            </div>
+            <input type="text" name="pages" required placeholder="Pages to extract (e.g. 1,3,5-7)">
+            <button type="submit" class="submit-btn">Extract Pages</button>
+        </form>
+
+        <!-- SCAN TO PDF FORM -->
+        <form id="scan2pdf-form" action="/scan2pdf" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="images" id="scan2pdf-images" multiple required accept="image/*" class="file-input">
+                <label for="scan2pdf-images" class="file-label">
+                    <div class="upload-icon-wrapper">📷</div>
+                    <span>Select Scanned Images</span>
+                    <span class="file-hint">Hold Ctrl to select multiple</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PDF</button>
+        </form>
+
+        <!-- OPTIMIZE FORM -->
+        <form id="optimize-form" action="/optimize" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="optimize-pdf" required accept=".pdf" class="file-input">
+                <label for="optimize-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">⚡</div>
+                    <span>Select PDF to Optimize</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Optimize PDF</button>
+        </form>
+
+        <!-- COMPRESS FORM -->
+        <form id="compress-form" action="/compress" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="compress-pdf" required accept=".pdf" class="file-input">
+                <label for="compress-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🗜️</div>
+                    <span>Select PDF to Compress</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Compress Size</button>
+        </form>
+
+        <!-- REPAIR FORM -->
+        <form id="repair-form" action="/repair" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="repair-pdf" required accept=".pdf" class="file-input">
+                <label for="repair-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🛠️</div>
+                    <span>Drag & Drop PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Repair PDF</button>
+        </form>
+
+        <!-- OCR FORM -->
+        <form id="ocr-form" action="/ocr" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="ocr-pdf" required accept=".pdf" class="file-input">
+                <label for="ocr-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🔍</div>
+                    <span>Select PDF for OCR</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Run OCR</button>
+        </form>
+
+        <!-- IMAGES TO PDF FORM -->
+        <form id="img2pdf-form" action="/img2pdf" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="images" id="img2pdf-images" multiple required accept="image/*" class="file-input">
+                <label for="img2pdf-images" class="file-label">
+                    <div class="upload-icon-wrapper">🖼️</div>
+                    <span>Select Images (JPG/PNG)</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PDF</button>
+        </form>
+
+        <!-- WORD2PDF FORM -->
+        <form id="word2pdf-form" action="/word2pdf" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="word" id="word2pdf" required accept=".docx,.doc" class="file-input">
+                <label for="word2pdf" class="file-label">
+                    <div class="upload-icon-wrapper">📑</div>
+                    <span>Drag & Drop Word Doc</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PDF</button>
+        </form>
+
+        <!-- PPT2PDF FORM -->
+        <form id="ppt2pdf-form" action="/ppt2pdf" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="ppt" id="ppt2pdf-file" required accept=".pptx,.ppt" class="file-input">
+                <label for="ppt2pdf-file" class="file-label">
+                    <div class="upload-icon-wrapper">📽️</div>
+                    <span>Drag & Drop PowerPoint</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PDF</button>
+        </form>
+
+        <!-- EXCEL2PDF FORM -->
+        <form id="excel2pdf-form" action="/excel2pdf" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="excel" id="excel2pdf" required accept=".xlsx,.xls" class="file-input">
+                <label for="excel2pdf" class="file-label">
+                    <div class="upload-icon-wrapper">📊</div>
+                    <span>Drag & Drop Excel Doc</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PDF</button>
+        </form>
+
+        <!-- HTML2PDF FORM -->
+        <form id="html2pdf-form" action="/html2pdf" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="html" id="html2pdf-file" required accept=".html,.htm" class="file-input">
+                <label for="html2pdf-file" class="file-label">
+                    <div class="upload-icon-wrapper">🌐</div>
+                    <span>Select HTML File</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PDF</button>
+        </form>
+
+        <!-- PDF2JPG FORM -->
+        <form id="pdf2jpg-form" action="/pdf2jpg" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="pdf2jpg-pdf" required accept=".pdf" class="file-input">
+                <label for="pdf2jpg-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🖼️</div>
+                    <span>Drag & Drop PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert Pages to JPG (ZIP)</button>
+        </form>
+
+        <!-- PDF2WORD FORM -->
+        <form id="pdf2word-form" action="/pdf2word" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="pdf2word" required accept=".pdf" class="file-input">
+                <label for="pdf2word" class="file-label">
+                    <div class="upload-icon-wrapper">📝</div>
+                    <span>Drag & Drop PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to Word</button>
+        </form>
+
+        <!-- PDF2PPT FORM -->
+        <form id="pdf2ppt-form" action="/pdf2ppt" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="pdf2ppt" required accept=".pdf" class="file-input">
+                <label for="pdf2ppt" class="file-label">
+                    <div class="upload-icon-wrapper">📽️</div>
+                    <span>Drag & Drop PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PPTX</button>
+        </form>
+
+        <!-- PDF2EXCEL FORM -->
+        <form id="pdf2excel-form" action="/pdf2excel" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="pdf2excel" required accept=".pdf" class="file-input">
+                <label for="pdf2excel" class="file-label">
+                    <div class="upload-icon-wrapper">📈</div>
+                    <span>Drag & Drop PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to Excel</button>
+        </form>
+
+        <!-- PDF2PDFA FORM -->
+        <form id="pdf2pdfa-form" action="/pdf2pdfa" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="pdf2pdfa-pdf" required accept=".pdf" class="file-input">
+                <label for="pdf2pdfa-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">📋</div>
+                    <span>Select PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PDF/A</button>
+        </form>
+
+        <!-- CONVERT TO TEXT FORM -->
+        <form id="convert-form" action="/convert" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="convert-pdf" required accept=".pdf" class="file-input">
+                <label for="convert-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">📄</div>
+                    <span>Select PDF for Extraction</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Extract Text (.txt)</button>
+        </form>
+
+        <!-- ROTATE PDF FORM -->
+        <form id="rotate-form" action="/rotate" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="rotate-pdf" required accept=".pdf" class="file-input">
+                <label for="rotate-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🔄</div>
+                    <span>Select PDF to Rotate</span>
+                </label>
+            </div>
+            <input type="number" name="angle" value="90" required placeholder="Rotation Angle (90, 180, 270)">
+            <button type="submit" class="submit-btn">Rotate PDF</button>
+        </form>
+
+        <!-- PAGENUMBERS FORM -->
+        <form id="pagenumbers-form" action="/pagenumbers" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="pagenumbers-pdf" required accept=".pdf" class="file-input">
+                <label for="pagenumbers-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🔢</div>
+                    <span>Drag & Drop PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Add Page Numbers</button>
+        </form>
+
+        <!-- WATERMARK PDF FORM -->
+        <form id="watermark-form" action="/watermark" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="watermark-pdf" required accept=".pdf" class="file-input">
+                <label for="watermark-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">💧</div>
+                    <span>Drag & Drop PDF</span>
+                </label>
+            </div>
+            <input type="text" name="watermark_text" required placeholder="Enter watermark text (e.g. CONFIDENTIAL)">
+            <button type="submit" class="submit-btn">Add Watermark</button>
+        </form>
+
+        <!-- CROP FORM -->
+        <form id="crop-form" action="/crop" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="crop-pdf" required accept=".pdf" class="file-input">
+                <label for="crop-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">✂️</div>
+                    <span>Select PDF</span>
+                </label>
+            </div>
+            <input type="number" name="margin" value="50" required placeholder="Margin size (e.g. 50)">
+            <button type="submit" class="submit-btn">Crop Margins</button>
+        </form>
+
+        <!-- EDIT FORM -->
+        <form id="edit-form" action="/edit" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="edit-pdf" required accept=".pdf" class="file-input">
+                <label for="edit-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">✏️</div>
+                    <span>Select PDF to Edit</span>
+                </label>
+            </div>
+            <div class="edit-fields-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+                <input type="text" name="text" required placeholder="Text to add" style="grid-column: span 3;">
+                <input type="number" name="page" value="1" required placeholder="Page">
+                <input type="number" name="x" value="50" required placeholder="X %">
+                <input type="number" name="y" value="50" required placeholder="Y %">
+            </div>
+            <button type="submit" class="submit-btn">Add Text</button>
+        </form>
+
+        <!-- PDF FORMS FORM -->
+        <form id="pdfforms-form" action="/pdf-forms" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="pdfforms-pdf" required accept=".pdf" class="file-input">
+                <label for="pdfforms-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">📋</div>
+                    <span>Select PDF with Forms</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Flatten Forms</button>
+        </form>
+
+        <!-- UNLOCK PDF FORM -->
+        <form id="unlock-form" action="/unlock" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="unlock-pdf" required accept=".pdf" class="file-input">
+                <label for="unlock-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🔓</div>
+                    <span>Drag & Drop Encrypted PDF</span>
+                </label>
+            </div>
+            <input type="password" name="password" required placeholder="Enter current password">
+            <button type="submit" class="submit-btn">Remove Protection</button>
+        </form>
+
+        <!-- LOCK PDF FORM -->
+        <form id="lock-form" action="/lock" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="lock-pdf" required accept=".pdf" class="file-input">
+                <label for="lock-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🔒</div>
+                    <span>Select PDF to Protect</span>
+                </label>
+            </div>
+            <input type="password" name="password" required placeholder="Enter password to encrypt">
+            <button type="submit" class="submit-btn">Lock PDF</button>
+        </form>
+
+        <!-- SIGN PDF FORM -->
+        <form id="sign-form" action="/sign" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="sign-pdf" required accept=".pdf" class="file-input">
+                <label for="sign-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">✍️</div>
+                    <span>Select PDF to Sign</span>
+                </label>
+            </div>
+            <input type="text" name="signature_text" required placeholder="Your signature name">
+            <input type="number" name="page" value="1" placeholder="Page number">
+            <button type="submit" class="submit-btn">Sign PDF</button>
+        </form>
+
+        <!-- REDACT FORM -->
+        <form id="redact-form" action="/redact" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="redact-pdf" required accept=".pdf" class="file-input">
+                <label for="redact-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">⬛</div>
+                    <span>Select PDF</span>
+                </label>
+            </div>
+            <input type="text" name="redact_text" required placeholder="Text to blackout (e.g. Social Security)">
+            <button type="submit" class="submit-btn">Redact Text</button>
+        </form>
+
+        <!-- COMPARE FORM -->
+        <form id="compare-form" action="/compare" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf1" id="compare-pdf1" required accept=".pdf" class="file-input">
+                <label for="compare-pdf1" class="file-label">
+                    <div class="upload-icon-wrapper">📄</div>
+                    <span>Select First PDF</span>
+                </label>
+            </div>
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf2" id="compare-pdf2" required accept=".pdf" class="file-input">
+                <label for="compare-pdf2" class="file-label">
+                    <div class="upload-icon-wrapper">📄</div>
+                    <span>Select Second PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Compare PDFs</button>
+        </form>
+
+        <!-- SUMMARIZE FORM -->
+        <form id="summarize-form" action="/summarize" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="summarize-pdf" required accept=".pdf" class="file-input">
+                <label for="summarize-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🤖</div>
+                    <span>Select PDF to Summarize</span>
+                </label>
+            </div>
+            <input type="number" name="sentences" value="10" placeholder="Number of summary sentences">
+            <button type="submit" class="submit-btn">Summarize PDF</button>
+        </form>
+
+        <!-- TRANSLATE FORM -->
+        <form id="translate-form" action="/translate" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="translate-pdf" required accept=".pdf" class="file-input">
+                <label for="translate-pdf" class="file-label">
+                    <div class="upload-icon-wrapper">🌍</div>
+                    <span>Select PDF to Translate</span>
+                </label>
+            </div>
+            <select name="target_lang">
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="zh-CN">Chinese</option>
+                <option value="ar">Arabic</option>
+                <option value="hi">Hindi</option>
+                <option value="pt">Portuguese</option>
+                <option value="ru">Russian</option>
+                <option value="ja">Japanese</option>
+                <option value="ko">Korean</option>
+                <option value="it">Italian</option>
+                <option value="nl">Dutch</option>
+                <option value="tr">Turkish</option>
+                <option value="ur">Urdu</option>
+            </select>
+            <button type="submit" class="submit-btn">Translate PDF</button>
+        </form>
+
+        <!-- ============================================ -->
+        <!-- IMAGE TOOL FORMS (1 – 20)                   -->
+        <!-- ============================================ -->
+
+        <!-- FORM 1: Image Resizer -->
+        <form id="img-resize-form" action="/img/resize" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-resize-img" required accept="image/*" class="file-input">
+                <label for="img-resize-img" class="file-label">
+                    <div class="upload-icon-wrapper">📐</div>
+                    <span>Select Image</span>
+                    <span class="file-hint">JPG, PNG, WEBP, BMP…</span>
+                </label>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <input type="number" name="width"  value="800" required placeholder="Width (px)">
+                <input type="number" name="height" value="600" required placeholder="Height (px)">
+            </div>
+            <label class="field-label muted">
+                <input type="checkbox" name="maintain_aspect" value="on"> Maintain aspect ratio
+            </label>
+            <button type="submit" class="submit-btn">Resize &amp; Download</button>
+        </form>
+
+        <!-- FORM 2: Image Compressor -->
+        <form id="img-compress-form" action="/img/compress" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-compress-img" required accept="image/*" class="file-input">
+                <label for="img-compress-img" class="file-label">
+                    <div class="upload-icon-wrapper">🗜️</div>
+                    <span>Select Image to Compress</span>
+                    <span class="file-hint">Outputs high-quality JPEG</span>
+                </label>
+            </div>
+            <div class="range-label">
+                <label for="quality-range">Quality: <span id="quality-val">60</span>%</label>
+                <input type="range" name="quality" id="quality-range" min="10" max="95" value="60" oninput="document.getElementById('quality-val').textContent=this.value">
+            </div>
+            <button type="submit" class="submit-btn">Compress &amp; Download</button>
+        </form>
+
+        <!-- FORM 3: Background Remover -->
+        <form id="img-rembg-form" action="/img/remove-bg" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-rembg-img" required accept="image/*" class="file-input">
+                <label for="img-rembg-img" class="file-label">
+                    <div class="upload-icon-wrapper">✂️</div>
+                    <span>Select Image</span>
+                    <span class="file-hint">Outputs transparent PNG</span>
+                </label>
+            </div>
+            <div class="info-box">
+                💡 Best results with rembg installed. Falls back to near-white background removal automatically.
+            </div>
+            <button type="submit" class="submit-btn">Remove Background</button>
+        </form>
+
+        <!-- FORM 4: JPG → PNG -->
+        <form id="img-jpg2png-form" action="/img/jpg2png" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-jpg2png-img" required accept=".jpg,.jpeg,.webp,.bmp" class="file-input">
+                <label for="img-jpg2png-img" class="file-label">
+                    <div class="upload-icon-wrapper">🔄</div>
+                    <span>Select JPG / WEBP / BMP</span>
+                    <span class="file-hint">Converts to lossless PNG</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to PNG</button>
+        </form>
+
+        <!-- FORM 5: PNG → JPG -->
+        <form id="img-png2jpg-form" action="/img/png2jpg" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-png2jpg-img" required accept=".png,.webp,.bmp,.tiff" class="file-input">
+                <label for="img-png2jpg-img" class="file-label">
+                    <div class="upload-icon-wrapper">🔄</div>
+                    <span>Select PNG / WEBP / BMP</span>
+                    <span class="file-hint">Transparency replaced with white</span>
+                </label>
+            </div>
+            <input type="number" name="quality" value="90" min="10" max="100" placeholder="JPEG quality (10–100)">
+            <button type="submit" class="submit-btn">Convert to JPG</button>
+        </form>
+
+        <!-- FORM 6: Image Cropper -->
+        <form id="img-crop-form" action="/img/crop" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-crop-img" required accept="image/*" class="file-input">
+                <label for="img-crop-img" class="file-label">
+                    <div class="upload-icon-wrapper">✂️</div>
+                    <span>Select Image to Crop</span>
+                    <span class="file-hint">Enter pixel coordinates</span>
+                </label>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <input type="number" name="left"   value="0"   placeholder="Left (px)">
+                <input type="number" name="top"    value="0"   placeholder="Top (px)">
+                <input type="number" name="right"  value="400" placeholder="Right (px)">
+                <input type="number" name="bottom" value="400" placeholder="Bottom (px)">
+            </div>
+            <button type="submit" class="submit-btn">Crop &amp; Download</button>
+        </form>
+
+        <!-- FORM 7: Image Rotator -->
+        <form id="img-rotate-form" action="/img/rotate" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-rotate-img" required accept="image/*" class="file-input">
+                <label for="img-rotate-img" class="file-label">
+                    <div class="upload-icon-wrapper">🔃</div>
+                    <span>Select Image</span>
+                </label>
+            </div>
+            <select name="angle">
+                <option value="90">Rotate 90° clockwise</option>
+                <option value="180">Rotate 180°</option>
+                <option value="270">Rotate 270° (90° counter-clockwise)</option>
+                <option value="45">Rotate 45°</option>
+            </select>
+            <button type="submit" class="submit-btn">Rotate &amp; Download</button>
+        </form>
+
+        <!-- FORM 8: Image Flipper -->
+        <form id="img-flip-form" action="/img/flip" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-flip-img" required accept="image/*" class="file-input">
+                <label for="img-flip-img" class="file-label">
+                    <div class="upload-icon-wrapper">↔️</div>
+                    <span>Select Image to Flip</span>
+                </label>
+            </div>
+            <select name="direction">
+                <option value="horizontal">Flip Horizontal (Mirror)</option>
+                <option value="vertical">Flip Vertical (Upside-down)</option>
+            </select>
+            <button type="submit" class="submit-btn">Flip &amp; Download</button>
+        </form>
+
+        <!-- FORM 9: Watermark Adder -->
+        <form id="img-watermark-form" action="/img/watermark" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-watermark-img" required accept="image/*" class="file-input">
+                <label for="img-watermark-img" class="file-label">
+                    <div class="upload-icon-wrapper">💧</div>
+                    <span>Select Image</span>
+                </label>
+            </div>
+            <input type="text" name="text" required placeholder="Watermark text (e.g. © 2025 My Brand)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <input type="number" name="opacity"   value="60" min="10" max="100" placeholder="Opacity % (10–100)">
+                <input type="number" name="font_size" value="40" min="12" max="120" placeholder="Font size (px)">
+            </div>
+            <button type="submit" class="submit-btn">Add Watermark &amp; Download</button>
+        </form>
+
+        <!-- FORM 10: Blur Tool -->
+        <form id="img-blur-form" action="/img/blur" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-blur-img" required accept="image/*" class="file-input">
+                <label for="img-blur-img" class="file-label">
+                    <div class="upload-icon-wrapper">🌫️</div>
+                    <span>Select Image</span>
+                </label>
+            </div>
+            <div class="range-label">
+                <label for="blur-range">Blur Radius: <span id="blur-val">3</span>px</label>
+                <input type="range" name="radius" id="blur-range" min="1" max="30" value="3" oninput="document.getElementById('blur-val').textContent=this.value">
+            </div>
+            <button type="submit" class="submit-btn">Apply Blur &amp; Download</button>
+        </form>
+
+        <!-- FORM 11: Brightness Adjuster -->
+        <form id="img-brightness-form" action="/img/brightness" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-bright-img" required accept="image/*" class="file-input">
+                <label for="img-bright-img" class="file-label">
+                    <div class="upload-icon-wrapper">☀️</div>
+                    <span>Select Image</span>
+                </label>
+            </div>
+            <div class="range-label">
+                <label for="bright-range">Brightness: <span id="bright-val">1.5</span>× (1.0 = original)</label>
+                <input type="range" name="factor" id="bright-range" min="0.2" max="3.0" step="0.1" value="1.5" oninput="document.getElementById('bright-val').textContent=parseFloat(this.value).toFixed(1)">
+            </div>
+            <button type="submit" class="submit-btn">Adjust Brightness</button>
+        </form>
+
+        <!-- FORM 12: Contrast Adjuster -->
+        <form id="img-contrast-form" action="/img/contrast" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-contrast-img" required accept="image/*" class="file-input">
+                <label for="img-contrast-img" class="file-label">
+                    <div class="upload-icon-wrapper">🔆</div>
+                    <span>Select Image</span>
+                </label>
+            </div>
+            <div class="range-label">
+                <label for="contrast-range">Contrast: <span id="contrast-val">1.5</span>× (1.0 = original)</label>
+                <input type="range" name="factor" id="contrast-range" min="0.2" max="4.0" step="0.1" value="1.5" oninput="document.getElementById('contrast-val').textContent=parseFloat(this.value).toFixed(1)">
+            </div>
+            <button type="submit" class="submit-btn">Adjust Contrast</button>
+        </form>
+
+        <!-- FORM 13: Sharpen -->
+        <form id="img-sharpen-form" action="/img/sharpen" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-sharpen-img" required accept="image/*" class="file-input">
+                <label for="img-sharpen-img" class="file-label">
+                    <div class="upload-icon-wrapper">🔬</div>
+                    <span>Select Image</span>
+                </label>
+            </div>
+            <div class="range-label">
+                <label for="sharp-range">Sharpness: <span id="sharp-val">2.0</span>× (1.0 = original)</label>
+                <input type="range" name="factor" id="sharp-range" min="1.0" max="5.0" step="0.5" value="2.0" oninput="document.getElementById('sharp-val').textContent=parseFloat(this.value).toFixed(1)">
+            </div>
+            <button type="submit" class="submit-btn">Sharpen &amp; Download</button>
+        </form>
+
+        <!-- FORM 14: Grayscale -->
+        <form id="img-grayscale-form" action="/img/grayscale" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-gray-img" required accept="image/*" class="file-input">
+                <label for="img-gray-img" class="file-label">
+                    <div class="upload-icon-wrapper">🩶</div>
+                    <span>Select Image</span>
+                    <span class="file-hint">Converts to classic black &amp; white</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert to Grayscale</button>
+        </form>
+
+        <!-- FORM 15: Images → PDF -->
+        <form id="img-to-pdf-form" action="/img/to-pdf" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="images" id="img-to-pdf-imgs" multiple required accept="image/*" class="file-input">
+                <label for="img-to-pdf-imgs" class="file-label">
+                    <div class="upload-icon-wrapper">📄</div>
+                    <span>Select Images (one or more)</span>
+                    <span class="file-hint">Hold Ctrl / Cmd to select multiple</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Convert Images to PDF</button>
+        </form>
+
+        <!-- FORM 16: PDF → Images -->
+        <form id="img-from-pdf-form" action="/img/from-pdf" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf" id="img-from-pdf-file" required accept=".pdf" class="file-input">
+                <label for="img-from-pdf-file" class="file-label">
+                    <div class="upload-icon-wrapper">🖼️</div>
+                    <span>Select PDF</span>
+                    <span class="file-hint">Downloads a ZIP of page images</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Export Pages to PNG (ZIP)</button>
+        </form>
+
+        <!-- FORM 17: Meme Generator -->
+        <form id="img-meme-form" action="/img/meme" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-meme-img" required accept="image/*" class="file-input">
+                <label for="img-meme-img" class="file-label">
+                    <div class="upload-icon-wrapper">😂</div>
+                    <span>Select Base Image</span>
+                </label>
+            </div>
+            <input type="text" name="top_text"    placeholder="Top text (optional)">
+            <input type="text" name="bottom_text" placeholder="Bottom text (optional)">
+            <button type="submit" class="submit-btn">Generate Meme</button>
+        </form>
+
+        <!-- FORM 18: AI Image Enhancer -->
+        <form id="img-enhance-form" action="/img/enhance" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-enhance-img" required accept="image/*" class="file-input">
+                <label for="img-enhance-img" class="file-label">
+                    <div class="upload-icon-wrapper">✨</div>
+                    <span>Select Image to Enhance</span>
+                    <span class="file-hint">Upscales using LANCZOS + sharpening</span>
+                </label>
+            </div>
+            <select name="scale">
+                <option value="2">2× Upscale (Recommended)</option>
+                <option value="3">3× Upscale</option>
+                <option value="4">4× Upscale (Large files)</option>
+            </select>
+            <button type="submit" class="submit-btn">Enhance &amp; Download</button>
+        </form>
+
+        <!-- FORM 19: Color Picker -->
+        <form id="img-colors-form" action="/img/colors" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-colors-img" required accept="image/*" class="file-input">
+                <label for="img-colors-img" class="file-label">
+                    <div class="upload-icon-wrapper">🎨</div>
+                    <span>Select Image</span>
+                    <span class="file-hint">Downloads an HTML color palette report</span>
+                </label>
+            </div>
+            <select name="num_colors">
+                <option value="5">5 dominant colors</option>
+                <option value="10" selected>10 dominant colors</option>
+                <option value="15">15 dominant colors</option>
+                <option value="20">20 dominant colors</option>
+            </select>
+            <button type="submit" class="submit-btn">Extract Colors</button>
+        </form>
+
+        <!-- FORM 20: Format Converter -->
+        <form id="img-format-form" action="/img/convert-format" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="img-format-img" required accept="image/*" class="file-input">
+                <label for="img-format-img" class="file-label">
+                    <div class="upload-icon-wrapper">🔀</div>
+                    <span>Select Image</span>
+                    <span class="file-hint">JPG · PNG · WEBP · BMP · TIFF · GIF</span>
+                </label>
+            </div>
+            <select name="format">
+                <option value="PNG">PNG — Lossless, supports transparency</option>
+                <option value="JPG">JPG — Smallest size for photos</option>
+                <option value="WEBP">WEBP — Modern, great compression</option>
+                <option value="BMP">BMP — Uncompressed bitmap</option>
+                <option value="TIFF">TIFF — High-quality for print</option>
+                <option value="GIF">GIF — Animated-friendly</option>
+            </select>
+            <button type="submit" class="submit-btn">Convert Format</button>
+        </form>
+
+    </div><!-- end forms-container -->
+
+    <!-- ============================================ -->
+    <!-- SIGNATURE / SIGN DOCUMENTS SECTION -->
+    <!-- ============================================ -->
+    <div id="signature-section" style="margin-top: 70px; padding: 50px clamp(20px, 5vw, 40px); background: linear-gradient(135deg, var(--color-indigo), var(--color-teal)); border-radius: 20px; color: #fff;">
+        <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center;">
+            <div style="flex: 1; min-width: 280px;">
+                <h2 style="font-size: var(--text-3xl); margin-bottom: 12px; color: #fff; font-weight: var(--fw-black); line-height: var(--lh-tight);">✍️ Sign documents in seconds</h2>
+                <p style="font-size: var(--text-lg); line-height: var(--lh-normal); opacity: 0.95; margin-bottom: 20px;">Add your signature to any PDF without printing, scanning, or installing anything. Place your name exactly where it belongs and download instantly.</p>
+                <a href="#sign-form" data-target="sign-form" class="signature-cta" style="display: inline-block; background: #fff; color: var(--color-indigo); font-weight: 700; padding: 14px 32px; border-radius: 10px; text-decoration: none;">Sign a PDF now →</a>
+            </div>
+            <div style="flex-shrink: 0;">
+                <svg width="160" height="120" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-label="Signature illustration">
+                    <rect x="20" y="10" width="120" height="100" rx="8" fill="#fff" opacity="0.15"/>
+                    <line x1="38" y1="40" x2="122" y2="40" stroke="#fff" stroke-width="2" opacity="0.4"/>
+                    <line x1="38" y1="56" x2="122" y2="56" stroke="#fff" stroke-width="2" opacity="0.4"/>
+                    <path d="M40 86 q12 -22 22 -4 q6 12 16 -8 q8 -14 18 6 q4 8 14 -2" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="38" y1="96" x2="122" y2="96" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ============================================ -->
+    <!-- GET PREMIUM SECTION                        -->
+    <!-- ============================================ -->
+    <div id="premium-section" style="margin-top: 70px; padding: 50px clamp(20px, 5vw, 40px); background: linear-gradient(135deg, var(--color-indigo), var(--color-teal)); border-radius: 20px; color: #fff;">
+        <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: space-between;">
+            <div style="flex: 1; min-width: 280px;">
+                <p style="font-size: var(--text-sm); font-weight: var(--fw-bold); letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; margin-bottom: 12px;">⭐ SANGAT Premium</p>
+                <h2 style="font-size: var(--text-3xl); margin-bottom: 12px; color: #fff; font-weight: var(--fw-black); line-height: var(--lh-tight);">Unlock the full experience</h2>
+                <p style="font-size: var(--text-lg); line-height: var(--lh-normal); opacity: 0.90; margin-bottom: 24px;">Process unlimited files, remove ads and watermarks, get priority speed, batch export, API access, and 5 GB cloud storage — all in one plan.</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px;">
+                    <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 14px; font-size: var(--text-sm); font-weight: var(--fw-semi);">✓ Unlimited files</span>
+                    <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 14px; font-size: var(--text-sm); font-weight: var(--fw-semi);">✓ No watermarks</span>
+                    <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 14px; font-size: var(--text-sm); font-weight: var(--fw-semi);">✓ Priority speed</span>
+                    <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 14px; font-size: var(--text-sm); font-weight: var(--fw-semi);">✓ API access</span>
+                    <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 14px; font-size: var(--text-sm); font-weight: var(--fw-semi);">✓ 5 GB cloud storage</span>
+                </div>
+                <a href="/pricing" style="display: inline-block; background: #fff; color: var(--color-indigo); font-weight: var(--fw-bold); padding: 14px 32px; border-radius: 10px; text-decoration: none; font-size: var(--text-base);">Get Premium →</a>
+            </div>
+            <div style="flex-shrink: 0;">
+                <svg width="160" height="120" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-label="Premium illustration">
+                    <!-- Card background -->
+                    <rect x="20" y="10" width="120" height="100" rx="10" fill="#fff" opacity="0.15"/>
+                    <!-- Crown shape -->
+                    <polyline points="44,76 44,46 60,62 80,38 100,62 116,46 116,76" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Crown base line -->
+                    <line x1="40" y1="80" x2="120" y2="80" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+                    <!-- Shine dots -->
+                    <circle cx="80" cy="38" r="4" fill="#fff" opacity="0.9"/>
+                    <circle cx="44" cy="46" r="3" fill="#fff" opacity="0.7"/>
+                    <circle cx="116" cy="46" r="3" fill="#fff" opacity="0.7"/>
+                    <!-- Stars -->
+                    <circle cx="36" cy="28" r="2" fill="#fff" opacity="0.5"/>
+                    <circle cx="128" cy="22" r="1.5" fill="#fff" opacity="0.5"/>
+                    <circle cx="130" cy="90" r="2" fill="#fff" opacity="0.4"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section" style="margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--color-border);">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 2.2rem; color: var(--color-navy); margin-bottom: 10px;">Frequently Asked Questions</h2>
+            <p style="color: var(--color-text-muted); font-size: 1.1rem;">Quick answers to your most pressing questions.</p>
+        </div>
+        
+        <div class="faq-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px;">
+            <!-- General Questions -->
+            <div style="background: var(--color-surface); padding: 30px; border-radius: 12px; border: 1px solid var(--color-border); box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <h3 style="color: var(--color-indigo); margin-bottom: 20px; font-size: 1.3rem;">General Questions</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px;">
+                    <li><a href="/faq#general-1" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> What is SANGAT Tools?</a></li>
+                    <li><a href="/faq#general-2" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> Is it free to use?</a></li>
+                    <li><a href="/faq#general-3" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> Are there file size limits?</a></li>
+                </ul>
+            </div>
+
+            <!-- Billing Questions -->
+            <div style="background: var(--color-surface); padding: 30px; border-radius: 12px; border: 1px solid var(--color-border); box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <h3 style="color: var(--color-indigo); margin-bottom: 20px; font-size: 1.3rem;">Billing & Payments</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px;">
+                    <li><a href="/faq#billing-1" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> How do I upgrade to Pro?</a></li>
+                    <li><a href="/faq#billing-2" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> Can I cancel my subscription?</a></li>
+                    <li><a href="/faq#billing-3" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> Local payment methods?</a></li>
+                </ul>
+            </div>
+
+            <!-- Security Questions -->
+            <div style="background: var(--color-surface); padding: 30px; border-radius: 12px; border: 1px solid var(--color-border); box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <h3 style="color: var(--color-indigo); margin-bottom: 20px; font-size: 1.3rem;">Security & Technical</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px;">
+                    <li><a href="/faq#security-1" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> Are my files secure?</a></li>
+                    <li><a href="/faq#security-2" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> How long are files stored?</a></li>
+                    <li><a href="/faq#security-3" style="color: var(--color-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600;"><span style="color: var(--color-teal);">→</span> Why did my conversion fail?</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Tab switching logic
+    const cards = document.querySelectorAll('.tool-card');
+    const forms = document.querySelectorAll('.upload-form');
+
+    // Make cards keyboard-accessible
+    cards.forEach(card => {
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+    });
+
+    function activateCard(card) {
+        cards.forEach(c => c.classList.remove('active'));
+        forms.forEach(f => f.classList.remove('active-form'));
+        card.classList.add('active');
+        const targetId = card.getAttribute('data-target');
+        const targetForm = document.getElementById(targetId);
+        if (targetForm) {
+            targetForm.classList.add('active-form');
+            document.querySelector('.forms-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => activateCard(card));
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                activateCard(card);
+            }
+        });
+    });
+
+    // File input UX (drag active states)
+    const fileInputs = document.querySelectorAll('.file-input');
+    fileInputs.forEach(input => {
+        const label = input.nextElementSibling;
+        
+        input.addEventListener('change', (e) => {
+            if (input.files && input.files.length > 0) {
+                const hint = label.querySelector('.file-hint') || label.querySelector('span:last-child');
+                if (input.files.length === 1) {
+                    hint.textContent = input.files[0].name;
+                } else {
+                    hint.textContent = input.files.length + " files selected";
+                }
+                label.style.borderColor = "var(--color-indigo)";
+                label.style.background = "var(--color-card-active-bg)";
+            }
+        });
+
+        // Form submit loading state
+        const form = input.closest('form');
+        if (form) {
+            form.addEventListener('submit', function() {
+                const btn = this.querySelector('.submit-btn');
+                if (!btn.getAttribute('data-original-text')) {
+                    btn.setAttribute('data-original-text', btn.textContent.trim());
+                }
+                btn.innerHTML = '⏳ Processing...';
+                btn.style.opacity = '0.75';
+                btn.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    btn.innerHTML = '✅ Done!';
+                    setTimeout(() => {
+                        btn.innerHTML = btn.getAttribute('data-original-text');
+                        btn.style.opacity = '1';
+                        btn.style.pointerEvents = 'auto';
+                    }, 2000);
+                }, 4000);
+            });
+        }
+    });
+
+    // Hash Selection Logic for Header Menu
+    window.selectToolFromHash = function() {
+        const hash = window.location.hash.substring(1); // e.g. "merge-form"
+        if (hash) {
+            const targetCard = document.querySelector(`.tool-card[data-target="${hash}"]`);
+            if (targetCard) {
+                targetCard.click();
+            }
+        }
+    };
+
+    window.addEventListener('load', selectToolFromHash);
+    window.addEventListener('hashchange', selectToolFromHash);
+
+    // Signature section CTA -> activate the sign-form tool
+    document.querySelectorAll('.signature-cta').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetCard = document.querySelector('.tool-card[data-target="sign-form"]');
+            if (targetCard) {
+                targetCard.click();
+            } else {
+                cards.forEach(c => c.classList.remove('active'));
+                forms.forEach(f => f.classList.remove('active-form'));
+                const sf = document.getElementById('sign-form');
+                if (sf) {
+                    sf.classList.add('active-form');
+                    document.querySelector('.forms-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
