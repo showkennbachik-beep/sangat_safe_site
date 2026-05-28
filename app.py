@@ -8,6 +8,22 @@ import webbrowser
 from datetime import timedelta
 from threading import Timer
 
+# ── Database abstraction (PostgreSQL on Render, SQLite locally) ───────────────
+DATABASE_URL = os.environ.get('DATABASE_URL', '')  # Render sets this automatically
+
+if DATABASE_URL:
+    # Render provides postgres:// but psycopg2 needs postgresql://
+    if DATABASE_URL.startswith('postgres://'):
+        DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+    try:
+        import psycopg2
+        from psycopg2.extras import RealDictCursor
+        USE_POSTGRES = True
+    except ImportError:
+        USE_POSTGRES = False
+else:
+    USE_POSTGRES = False
+
 from dotenv import load_dotenv
 load_dotenv()  # Load .env before anything else reads os.environ
 
@@ -76,12 +92,27 @@ app.config.update(
 Compress(app)
 
 # ── Database ──────────────────────────────────────────────────────────────────
+def get_db():
+    if USE_POSTGRES:
+        return psycopg2.connect(DATABASE_URL)
+    return sqlite3.connect(DB_PATH)
+
 def init_db():
-    with sqlite3.connect(DB_PATH) as conn:
-        conn.execute('''CREATE TABLE IF NOT EXISTS users
-                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                      username TEXT UNIQUE NOT NULL,
-                      password TEXT NOT NULL)''')
+    if USE_POSTGRES:
+        with get_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute('''CREATE TABLE IF NOT EXISTS users
+                             (id SERIAL PRIMARY KEY,
+                              username TEXT UNIQUE NOT NULL,
+                              password TEXT NOT NULL)''')
+            conn.commit()
+    else:
+        with get_db() as conn:
+            conn.execute('''CREATE TABLE IF NOT EXISTS users
+                         (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                          username TEXT UNIQUE NOT NULL,
+                          password TEXT NOT NULL)''')
+
 init_db()
 
 # ── Security headers ──────────────────────────────────────────────────────────
@@ -291,15 +322,19 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         hashed = generate_password_hash(password)
-        
         try:
-            with sqlite3.connect(DB_PATH) as conn:
-                conn.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed))
+            if USE_POSTGRES:
+                with get_db() as conn:
+                    with conn.cursor() as cur:
+                        cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hashed))
+                    conn.commit()
+            else:
+                with get_db() as conn:
+                    conn.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed))
             flash('Account created! You can now log in.')
             return redirect(url_for('login'))
-        except sqlite3.IntegrityError:
+        except Exception:
             flash('Username already exists.')
-            
     return render_template('signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -307,16 +342,20 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        
-        with sqlite3.connect(DB_PATH) as conn:
-            user = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
-            
+        user = None
+        if USE_POSTGRES:
+            with get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+                    user = cur.fetchone()
+        else:
+            with get_db() as conn:
+                user = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
         if user and check_password_hash(user[2], password):
             session['user'] = user[1]
             return redirect(url_for('home'))
         else:
             flash('Invalid username or password.')
-            
     return render_template('login.html')
 
 @app.route('/logout')

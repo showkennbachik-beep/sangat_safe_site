@@ -11,6 +11,9 @@ Werkzeug>=3.0.0          # password hashing (ships with Flask, pinned for safety
 # --- Production server (required for deployment) ---
 gunicorn>=21.2.0         # WSGI server — do NOT use Flask dev server in production
 
+# --- Database (PostgreSQL on Render, SQLite locally) ---
+psycopg2-binary>=2.9.0   # PostgreSQL adapter — auto-used when DATABASE_URL is set
+
 # --- Environment & config ---
 python-dotenv>=1.0.0     # loads .env into os.environ on startup
 
