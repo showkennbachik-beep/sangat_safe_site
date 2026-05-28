@@ -1276,7 +1276,10 @@
         const targetForm = document.getElementById(targetId);
         if (targetForm) {
             targetForm.classList.add('active-form');
-            document.querySelector('.forms-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            var fc = document.querySelector('.forms-container');
+            var navH = document.querySelector('.app-bottom-nav') ? 72 : 0;
+            var top = fc.getBoundingClientRect().top + window.scrollY - 80 - navH;
+            window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
         }
     }
 

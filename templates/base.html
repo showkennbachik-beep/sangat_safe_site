@@ -586,11 +586,11 @@
                 <span class="tab-icon">🏠</span>
                 <span>Home</span>
             </a>
-            <a href="/#pdf-tools-section" class="app-tab" id="bottom-tab-pdf" onclick="scrollToSection('pdf-tools-section')" aria-label="PDF tools">
+            <a href="/#pdf-tools-section" class="app-tab" id="bottom-tab-pdf" onclick="scrollToSection('pdf-tools-section',event)" aria-label="PDF tools">
                 <span class="tab-icon">📄</span>
                 <span>PDF</span>
             </a>
-            <a href="/#image-tools-section" class="app-tab" id="bottom-tab-img" onclick="scrollToSection('image-tools-section')" aria-label="Image tools">
+            <a href="/#image-tools-section" class="app-tab" id="bottom-tab-img" onclick="scrollToSection('image-tools-section',event)" aria-label="Image tools">
                 <span class="tab-icon">🖼️</span>
                 <span>Images</span>
             </a>
@@ -602,13 +602,14 @@
     </nav>
 
     <script>
-        // Smooth scroll to section on same page, navigate if on different page
-        function scrollToSection(id) {
+        // Smooth scroll to section — passes e explicitly to avoid bare global `event`
+        function scrollToSection(id, e) {
+            if (e) e.preventDefault();
             var el = document.getElementById(id);
             if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Prevent default link navigation
-                event.preventDefault();
+                var navH = document.querySelector('.app-bottom-nav') ? 64 : 0;
+                var top = el.getBoundingClientRect().top + window.scrollY - 72 - navH;
+                window.scrollTo({ top: top, behavior: 'smooth' });
             }
         }
 
