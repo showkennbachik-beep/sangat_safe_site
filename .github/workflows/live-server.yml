@@ -58,15 +58,25 @@ jobs:
         run: |
           URL=""
 
-          # Try 1: localhost.run (very reliable, no bypass page)
-          echo "Trying localhost.run..."
-          ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 \
-              -R 80:localhost:5000 nokey@localhost.run > /tmp/lhr.log 2>&1 &
-          sleep 10
-          URL=$(grep -oP 'https://[a-zA-Z0-9._-]+\.(lhr\.life|localhost\.run)' /tmp/lhr.log | head -1)
-          echo "localhost.run URL: $URL"
+          # Try 1: Pinggy — port 443, no bypass, very reliable
+          echo "Trying Pinggy..."
+          ssh -p 443 -o StrictHostKeyChecking=no -o ServerAliveInterval=30 \
+              -R0:localhost:5000 a.pinggy.io > /tmp/pinggy.log 2>&1 &
+          sleep 12
+          URL=$(grep -oP 'https://[a-zA-Z0-9-]+\.free\.pinggy\.link' /tmp/pinggy.log | head -1)
+          echo "Pinggy URL: $URL"
 
-          # Try 2: Serveo
+          # Try 2: localhost.run — no bypass page
+          if [ -z "$URL" ]; then
+            echo "Trying localhost.run..."
+            ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 \
+                -R 80:localhost:5000 nokey@localhost.run > /tmp/lhr.log 2>&1 &
+            sleep 10
+            URL=$(grep -oP 'https://[a-zA-Z0-9._-]+\.(lhr\.life|localhost\.run)' /tmp/lhr.log | head -1)
+            echo "localhost.run URL: $URL"
+          fi
+
+          # Try 3: Serveo
           if [ -z "$URL" ]; then
             echo "Trying Serveo..."
             ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 \
@@ -74,16 +84,6 @@ jobs:
             sleep 10
             URL=$(grep -oP 'https://[a-zA-Z0-9._-]*(serveousercontent\.com|serveo\.net)' /tmp/serveo.log | head -1)
             echo "Serveo URL: $URL"
-          fi
-
-          # Try 3: localtunnel
-          if [ -z "$URL" ]; then
-            echo "Trying localtunnel..."
-            npm install -g localtunnel --quiet 2>/dev/null
-            NODE_TLS_REJECT_UNAUTHORIZED=0 nohup lt --port 5000 > /tmp/lt.log 2>&1 &
-            sleep 10
-            URL=$(grep -o 'https://[a-zA-Z0-9-]*\.loca\.lt' /tmp/lt.log | head -1)
-            echo "localtunnel URL: $URL"
           fi
 
           echo ""
