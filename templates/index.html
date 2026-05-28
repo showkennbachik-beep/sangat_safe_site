@@ -3,7 +3,7 @@
 {% block content %}
 <div style="width: 100%; max-width: 1100px; margin: 0 auto;">
     <div class="container" style="margin-bottom: 30px; text-align: center; border-radius: 16px;">
-        <h1 style="font-size: 2.6rem; font-weight: 800; color: var(--color-navy); margin-bottom: 10px; letter-spacing: -1px;">Ultimate <span class="highlight">PDF</span> Toolkit</h1>
+        <h1 class="page-hero-h1">Ultimate <span class="highlight">PDF</span> Toolkit</h1>
         <p style="color: var(--color-text-muted); font-size: var(--text-lg);">Professional, <strong style="color: var(--color-indigo);">fast</strong>, and <span class="highlight-teal">secure</span> document manipulation.</p>
     </div>
 
@@ -390,7 +390,7 @@
                 <label for="merge-pdfs" class="file-label">
                     <div class="upload-icon-wrapper">🔗</div>
                     <span>Select Multiple PDFs to Merge</span>
-                    <span class="file-hint">Hold Ctrl to select multiple</span>
+                    <span class="file-hint file-hint-desktop">Hold Ctrl to select multiple</span>
                 </label>
             </div>
             <button type="submit" class="submit-btn">Merge Files</button>
@@ -441,7 +441,7 @@
                 <label for="scan2pdf-images" class="file-label">
                     <div class="upload-icon-wrapper">📷</div>
                     <span>Select Scanned Images</span>
-                    <span class="file-hint">Hold Ctrl to select multiple</span>
+                    <span class="file-hint file-hint-desktop">Hold Ctrl to select multiple</span>
                 </label>
             </div>
             <button type="submit" class="submit-btn">Convert to PDF</button>
@@ -835,7 +835,7 @@
                     <span class="file-hint">JPG, PNG, WEBP, BMP…</span>
                 </label>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="grid-2col">
                 <input type="number" name="width"  value="800" required placeholder="Width (px)">
                 <input type="number" name="height" value="600" required placeholder="Height (px)">
             </div>
@@ -915,7 +915,7 @@
                     <span class="file-hint">Enter pixel coordinates</span>
                 </label>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="grid-2col">
                 <input type="number" name="left"   value="0"   placeholder="Left (px)">
                 <input type="number" name="top"    value="0"   placeholder="Top (px)">
                 <input type="number" name="right"  value="400" placeholder="Right (px)">
@@ -968,7 +968,7 @@
                 </label>
             </div>
             <input type="text" name="text" required placeholder="Watermark text (e.g. © 2025 My Brand)">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="grid-2col">
                 <input type="number" name="opacity"   value="60" min="10" max="100" placeholder="Opacity % (10–100)">
                 <input type="number" name="font_size" value="40" min="12" max="120" placeholder="Font size (px)">
             </div>
@@ -1059,7 +1059,7 @@
                 <label for="img-to-pdf-imgs" class="file-label">
                     <div class="upload-icon-wrapper">📄</div>
                     <span>Select Images (one or more)</span>
-                    <span class="file-hint">Hold Ctrl / Cmd to select multiple</span>
+                    <span class="file-hint file-hint-desktop">Hold Ctrl / Cmd to select multiple</span>
                 </label>
             </div>
             <button type="submit" class="submit-btn">Convert Images to PDF</button>
@@ -1217,7 +1217,7 @@
     <!-- FAQ Section -->
     <div class="faq-section" style="margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--color-border);">
         <div style="text-align: center; margin-bottom: 40px;">
-            <h2 style="font-size: 2.2rem; color: var(--color-navy); margin-bottom: 10px;">Frequently Asked Questions</h2>
+            <h2 style="font-size: clamp(1.4rem, 5vw, 2.2rem); color: var(--color-navy); margin-bottom: 10px;">Frequently Asked Questions</h2>
             <p style="color: var(--color-text-muted); font-size: 1.1rem;">Quick answers to your most pressing questions.</p>
         </div>
         

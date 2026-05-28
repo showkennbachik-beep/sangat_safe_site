@@ -33,6 +33,11 @@
 .pricing-card.featured:hover {
     transform: scale(1.02) translateY(-5px);
 }
+@media (max-width: 600px) {
+    .pricing-grid { gap: 16px; }
+    .pricing-card { padding: 22px 16px; min-width: 0; }
+    .pricing-card.featured { transform: scale(1) !important; }
+}
 .pricing-badge {
     background: #e2e8f0;
     color: var(--color-navy);
@@ -46,7 +51,7 @@
     margin-bottom: 20px;
 }
 .pricing-price {
-    font-size: 2.5rem;
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
     font-weight: 800;
     color: var(--color-navy);
     margin-bottom: 20px;

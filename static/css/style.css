@@ -561,13 +561,18 @@ select {
     background: var(--color-surface);
     border: 1px solid var(--color-input-border);
     border-radius: 8px;
-    padding: 14px;
+    padding: 14px 36px 14px 14px;
     color: var(--color-navy);
     font-size: var(--text-base);
     line-height: var(--lh-snug);
     width: 100%;
     transition: all 0.2s;
     cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
 }
 select:focus {
     outline: none;
@@ -1449,5 +1454,186 @@ input, select, textarea, .icon-btn, .dropdown-content a {
 
 @media (max-width: 768px) {
     .app-bottom-nav { display: block; }
+}
+
+/* ============================================================
+   PAGE BODY, FEATURES LIST, FEATURE ITEM
+   Used across about.html, features.html, blog.html etc.
+   ============================================================ */
+.page-body {
+    margin-top: 20px;
+    line-height: var(--lh-normal);
+    color: var(--color-navy);
+}
+.page-body p {
+    margin-bottom: 16px;
+    line-height: var(--lh-relaxed);
+    color: var(--color-text-muted);
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: box-shadow 0.2s;
+}
+.feature-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.feature-item .icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+    padding-top: 2px;
+}
+.feature-item .details h3 {
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+    color: var(--color-navy);
+    margin-bottom: 4px;
+}
+.feature-item .details p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--lh-normal);
+    margin: 0;
+}
+
+/* ============================================================
+   TABLET NAV — 769px to 900px
+   Desktop nav is too cramped at this width; switch to the
+   hamburger-triggered mobile drawer instead. No bottom nav
+   is shown (that's phone-only at ≤768px).
+   ============================================================ */
+@media (max-width: 900px) and (min-width: 769px) {
+    .navbar { padding: 12px 20px; }
+    #desktop-nav { display: none !important; }
+    #theme-toggle { display: flex !important; }   /* keep dark-mode btn */
+    .hamburger-btn { display: flex !important; }  /* show hamburger */
+    .mobile-nav { display: flex; }
+    .mobile-nav-backdrop { display: block; }
+}
+
+/* ============================================================
+   COOKIE BANNER — sit above the 56 px mobile bottom nav
+   ============================================================ */
+@media (max-width: 768px) {
+    .cookie-banner {
+        bottom: calc(56px + env(safe-area-inset-bottom));
+        padding: 0 12px 8px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE 2-COL GRID UTILITY
+   Used in forms where two inputs sit side-by-side on desktop
+   but should stack on small phones.
+   ============================================================ */
+.grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+@media (max-width: 480px) {
+    .grid-2col { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   RESPONSIVE HERO HEADING (PDF Toolkit / Image Toolkit)
+   Replaces the inline font-size:2.6rem that can't be overridden
+   by regular CSS media queries.
+   ============================================================ */
+.page-hero-h1 {
+    font-size: clamp(1.6rem, 5.5vw, 2.6rem);
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+    line-height: 1.25;
+}
+
+/* ============================================================
+   FOOTER — reduce side padding on small screens
+   ============================================================ */
+@media (max-width: 768px) {
+    .footer { padding: 40px 20px 24px; }
+}
+@media (max-width: 480px) {
+    .footer { padding: 30px 16px 20px; }
+}
+
+/* ============================================================
+   MULTI-SELECT HINT — "Hold Ctrl" is meaningless on touch;
+   hide it on mobile so only the filename feedback shows.
+   ============================================================ */
+@media (max-width: 768px) {
+    .file-hint-desktop { display: none; }
+}
+
+/* ============================================================
+   TOUCH IMPROVEMENTS
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Prevent double-tap zoom on buttons & cards */
+    .submit-btn,
+    .tool-card,
+    .app-tab {
+        touch-action: manipulation;
+    }
+    /* Slightly larger tap area for icon buttons */
+    .icon-btn {
+        padding: 10px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    /* Ensure selects are tall enough for easy tapping on iOS */
+    select {
+        min-height: 50px;
+    }
+    /* File labels: bigger tap target, solid border feels more native */
+    .file-label {
+        min-height: 120px;
+    }
+}
+
+/* ============================================================
+   PREVENT iOS AUTO-ZOOM ON INPUTS (font-size must be ≥16px)
+   ============================================================ */
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    input[type="email"],
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* ============================================================
+   DARK MODE: select arrow needs a light colour
+   ============================================================ */
+:root.dark-mode select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   LANDSCAPE PHONE — give a bit more breathing room
+   ============================================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .app-bottom-nav { display: none !important; }
+    body { padding-bottom: 0 !important; }
+    .main-content { padding: 10px 16px; }
+    .navbar { padding: 8px 20px; }
 }
 

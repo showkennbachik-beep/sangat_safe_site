@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\HP\\\\Documents\\\\sangat-safe-site\\\\sangat-safe-site\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(Sort-Object FullName)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('app.py'\\).read\\(\\)\\); print\\('app.py syntax OK'\\)\")",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('app.py', encoding='utf-8'\\).read\\(\\)\\); print\\('app.py syntax OK'\\)\")",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('image_tools.py', encoding='utf-8'\\).read\\(\\)\\); print\\('image_tools.py syntax OK'\\)\")",
+      "Bash(python -c \"from image_tools import resize_image, compress_image, remove_background, jpg_to_png, png_to_jpg, crop_image, rotate_image, flip_image, add_watermark_to_image, blur_image, adjust_brightness, adjust_contrast, sharpen_image, convert_to_grayscale, image_to_pdf_tool, pdf_to_images_tool, generate_meme, enhance_image, get_image_colors, convert_image_format; print\\('All 20 image tool functions imported OK'\\)\")",
+      "Bash(python -c ' *)"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python app.py)",
+      "Bash(curl *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(npx --yes localtunnel --port 5000)",
+      "PowerShell(Receive-Job *)",
+      "PowerShell(npm install *)",
+      "PowerShell(Test-Path \"C:\\\\Users\\\\HP\\\\cloudflared.exe\"; if \\(Test-Path \"C:\\\\Users\\\\HP\\\\cloudflared.exe\"\\) { \\(Get-Item \"C:\\\\Users\\\\HP\\\\cloudflared.exe\"\\).Length })",
+      "PowerShell(pip install *)",
+      "Bash(python -c ' *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(railway --version)",
+      "PowerShell(Get-Process *)",
+      "PowerShell(npm *)",
+      "PowerShell(python \"C:\\\\Users\\\\HP\\\\run_tunnel.py\" 2>&1)",
+      "PowerShell(python -c \"import urllib.request; ip = urllib.request.urlopen\\('http://checkip.amazonaws.com'\\).read\\(\\).decode\\(\\).strip\\(\\); print\\('Public IP:', ip\\)\")",
+      "PowerShell(Start-Process \"https://dash.cloudflare.com/argotunnel?aud=&callback=https%3A%2F%2Flogin.cloudflareaccess.org%2FsEUjyVU_EBDIsCQnLfpCe3Zaq_J1EtE0BTu2WWQaHSg%3D\")",
+      "PowerShell(Start-Process \"https://dash.cloudflare.com/argotunnel?aud=&callback=https%3A%2F%2Flogin.cloudflareaccess.org%2FfqHRaetIv1pqGk77FrZiH7bbQRAufqkh9575EZWaIwM%3D\")",
+      "PowerShell(Start-Process \"https://github.com/showkennbachik-beep/sangat_safe_site/actions\")",
+      "Read(//tmp/**)",
+      "PowerShell(Start-Process \"https://github.com/showkennbachik-beep/sangat_safe_site/actions/runs/26570317552\")",
+      "PowerShell(Start-Process \"https://github.com/showkennbachik-beep/sangat_safe_site/blob/main/LIVE_URL.txt\")"
+    ]
+  }
+}
