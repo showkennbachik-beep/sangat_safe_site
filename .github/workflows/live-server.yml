@@ -53,25 +53,37 @@ jobs:
           echo "Flask status: $STATUS"
           if [ "$STATUS" != "200" ]; then cat flask.log; fi
 
-      - name: Start Serveo tunnel (no password page)
+      - name: Start tunnel (no password page)
         id: tunnel
         run: |
-          # Serveo — clean HTTPS URL, no bypass page needed
-          ssh -o StrictHostKeyChecking=no \
-              -o ServerAliveInterval=30 \
-              -o ServerAliveCountMax=10 \
-              -o ExitOnForwardFailure=yes \
-              -R 80:localhost:5000 serveo.net > /tmp/serveo.log 2>&1 &
-          sleep 10
-          URL=$(grep -o 'https://[a-zA-Z0-9._-]*serveousercontent\.com\|https://[a-zA-Z0-9-]*\.serveo\.net' /tmp/serveo.log | head -1)
+          URL=""
 
-          # Fallback to localtunnel if Serveo fails
+          # Try 1: localhost.run (very reliable, no bypass page)
+          echo "Trying localhost.run..."
+          ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 \
+              -R 80:localhost:5000 nokey@localhost.run > /tmp/lhr.log 2>&1 &
+          sleep 10
+          URL=$(grep -oP 'https://[a-zA-Z0-9._-]+\.(lhr\.life|localhost\.run)' /tmp/lhr.log | head -1)
+          echo "localhost.run URL: $URL"
+
+          # Try 2: Serveo
           if [ -z "$URL" ]; then
-            echo "Serveo failed, trying localtunnel..."
+            echo "Trying Serveo..."
+            ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 \
+                -R 80:localhost:5000 serveo.net > /tmp/serveo.log 2>&1 &
+            sleep 10
+            URL=$(grep -oP 'https://[a-zA-Z0-9._-]*(serveousercontent\.com|serveo\.net)' /tmp/serveo.log | head -1)
+            echo "Serveo URL: $URL"
+          fi
+
+          # Try 3: localtunnel
+          if [ -z "$URL" ]; then
+            echo "Trying localtunnel..."
             npm install -g localtunnel --quiet 2>/dev/null
             NODE_TLS_REJECT_UNAUTHORIZED=0 nohup lt --port 5000 > /tmp/lt.log 2>&1 &
             sleep 10
             URL=$(grep -o 'https://[a-zA-Z0-9-]*\.loca\.lt' /tmp/lt.log | head -1)
+            echo "localtunnel URL: $URL"
           fi
 
           echo ""
