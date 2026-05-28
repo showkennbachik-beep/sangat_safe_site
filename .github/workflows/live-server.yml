@@ -1,0 +1,75 @@
+name: SANGAT Live Server
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  serve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system packages
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-eng libgl1 -qq
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt --quiet
+
+      - name: Install localtunnel
+        run: npm install -g localtunnel --quiet
+
+      - name: Start Flask server
+        env:
+          SECRET_KEY: ${{ github.run_id }}-sangat-secret
+          FLASK_ENV: production
+          PORT: "5000"
+        run: |
+          nohup python app.py > flask.log 2>&1 &
+          echo "Flask starting..."
+          sleep 6
+          curl -s -o /dev/null -w "Flask status: %{http_code}\n" http://127.0.0.1:5000/healthz
+
+      - name: Start tunnel and print URL
+        run: |
+          nohup lt --port 5000 > tunnel.log 2>&1 &
+          sleep 8
+          URL=$(cat tunnel.log | grep -o 'https://[a-zA-Z0-9-]*\.loca\.lt')
+          echo ""
+          echo "============================================"
+          echo "  YOUR LIVE URL IS:"
+          echo "  $URL"
+          echo "============================================"
+          echo "  BYPASS PASSWORD: $(curl -s http://checkip.amazonaws.com)"
+          echo "============================================"
+          echo ""
+          echo "LIVE_URL=$URL" >> $GITHUB_STEP_SUMMARY
+          echo "## 🌐 SANGAT Tools is LIVE" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** $URL" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Bypass password** (enter when first opening): $(curl -s http://checkip.amazonaws.com)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Keep server alive (up to 6 hours)
+        run: |
+          URL=$(cat tunnel.log | grep -o 'https://[a-zA-Z0-9-]*\.loca\.lt')
+          echo "Server live at: $URL"
+          for i in $(seq 1 340); do
+            sleep 60
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:5000/healthz 2>/dev/null || echo "000")
+            if [ "$STATUS" != "200" ]; then
+              echo "Flask died, restarting..."
+              nohup python app.py > flask.log 2>&1 &
+              sleep 5
+            fi
+            echo "[$i/340] Running... URL: $URL"
+          done
