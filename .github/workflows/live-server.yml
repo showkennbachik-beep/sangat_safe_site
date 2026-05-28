@@ -77,6 +77,14 @@ jobs:
           echo "### 🔑 Bypass password: \`$PUBLIC_IP\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "> Enter the bypass password once when you first open the URL" >> $GITHUB_STEP_SUMMARY
+          # Save URL to file so it can be read via GitHub API
+          git config user.email "bot@sangat.tools"
+          git config user.name "SANGAT Bot"
+          echo "$URL" > LIVE_URL.txt
+          echo "Bypass: $PUBLIC_IP" >> LIVE_URL.txt
+          git add LIVE_URL.txt
+          git diff --cached --quiet || git commit -m "chore: update live URL [skip ci]"
+          git push https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git HEAD:main --force 2>/dev/null || true
 
       - name: Keep server alive (up to 6 hours)
         run: |
