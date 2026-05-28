@@ -12,11 +12,15 @@ WORKDIR /app
 # Install system-level dependencies
 # - tesseract-ocr: required by pytesseract (OCR tool)
 # - libgl1: required by PyMuPDF/OpenCV on slim base images
+# - build-essential, pkg-config, libcairo2-dev: required to compile pycairo from source (no prebuilt wheel on this platform)
 RUN apt-get update && apt-get install -y --no-install-recommends \
         tesseract-ocr \
         tesseract-ocr-eng \
         libgl1 \
         libglib2.0-0 \
+        build-essential \
+        pkg-config \
+        libcairo2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies (cached layer — only rebuilds when requirements change)
