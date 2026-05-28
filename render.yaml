@@ -1,18 +1,18 @@
 services:
   - type: web
     name: sangat-tools
-    runtime: python
+    runtime: docker          # Use Docker so system deps (Tesseract, libgl) are installed
     region: oregon
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn --config gunicorn.conf.py app:app
+    dockerfilePath: ./Dockerfile
     autoDeploy: true
+    healthCheckPath: /healthz
     envVars:
+      - key: SECRET_KEY
+        generateValue: true  # Render auto-generates a secure random value
       - key: FLASK_ENV
         value: production
-      - key: SECRET_KEY
-        generateValue: true
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: MAX_UPLOAD_MB
-        value: "100"
+        value: "50"
+      - key: PORT
+        value: "8080"
