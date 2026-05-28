@@ -27,8 +27,7 @@ jobs:
           sudo apt-get install -y \
             tesseract-ocr tesseract-ocr-eng \
             libgl1-mesa-glx libglib2.0-0 \
-            libmupdf-dev libfontconfig-dev \
-            libjpeg-dev libpng-dev \
+            libjpeg-dev libpng-dev openssh-client \
             --no-install-recommends -qq
 
       - name: Install Python dependencies
@@ -42,9 +41,6 @@ jobs:
             deep-translator xhtml2pdf pytesseract \
             --quiet
 
-      - name: Install localtunnel
-        run: npm install -g localtunnel --quiet
-
       - name: Start Flask server
         env:
           SECRET_KEY: sangat-live-${{ github.run_id }}
@@ -55,44 +51,51 @@ jobs:
           sleep 8
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:5000/healthz)
           echo "Flask status: $STATUS"
-          if [ "$STATUS" != "200" ]; then
-            echo "Flask log:"
-            cat flask.log
-          fi
+          if [ "$STATUS" != "200" ]; then cat flask.log; fi
 
-      - name: Start tunnel and show URL
+      - name: Start Serveo tunnel (no password page)
         id: tunnel
         run: |
-          NODE_TLS_REJECT_UNAUTHORIZED=0 nohup lt --port 5000 > tunnel.log 2>&1 &
+          # Serveo — clean HTTPS URL, no bypass page needed
+          ssh -o StrictHostKeyChecking=no \
+              -o ServerAliveInterval=30 \
+              -o ServerAliveCountMax=10 \
+              -o ExitOnForwardFailure=yes \
+              -R 80:localhost:5000 serveo.net > /tmp/serveo.log 2>&1 &
           sleep 10
-          URL=$(grep -o 'https://[a-zA-Z0-9-]*\.loca\.lt' tunnel.log | head -1)
-          PUBLIC_IP=$(curl -s http://checkip.amazonaws.com)
+          URL=$(grep -o 'https://[a-zA-Z0-9._-]*serveousercontent\.com\|https://[a-zA-Z0-9-]*\.serveo\.net' /tmp/serveo.log | head -1)
+
+          # Fallback to localtunnel if Serveo fails
+          if [ -z "$URL" ]; then
+            echo "Serveo failed, trying localtunnel..."
+            npm install -g localtunnel --quiet 2>/dev/null
+            NODE_TLS_REJECT_UNAUTHORIZED=0 nohup lt --port 5000 > /tmp/lt.log 2>&1 &
+            sleep 10
+            URL=$(grep -o 'https://[a-zA-Z0-9-]*\.loca\.lt' /tmp/lt.log | head -1)
+          fi
+
           echo ""
           echo "=================================================="
-          echo "  YOUR LIVE WEBSITE URL:"
+          echo "  SANGAT TOOLS LIVE URL:"
           echo "  $URL"
-          echo "  Bypass password: $PUBLIC_IP"
+          echo "  (No password needed — open directly)"
           echo "=================================================="
-          echo "## 🌐 SANGAT Tools is LIVE!" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🔗 URL: $URL" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🔑 Bypass password: \`$PUBLIC_IP\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "> Enter the bypass password once when you first open the URL" >> $GITHUB_STEP_SUMMARY
-          # Save URL to file so it can be read via GitHub API
+
+          # Write to repo so we can read it via API
           git config user.email "bot@sangat.tools"
           git config user.name "SANGAT Bot"
           echo "$URL" > LIVE_URL.txt
-          echo "Bypass: $PUBLIC_IP" >> LIVE_URL.txt
           git add LIVE_URL.txt
           git diff --cached --quiet || git commit -m "chore: update live URL [skip ci]"
           git push https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git HEAD:main --force 2>/dev/null || true
 
+          echo "## 🌐 SANGAT Tools is LIVE" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 $URL" >> $GITHUB_STEP_SUMMARY
+          echo "> Open directly — no password needed" >> $GITHUB_STEP_SUMMARY
+
       - name: Keep server alive (up to 6 hours)
         run: |
-          URL=$(grep -o 'https://[a-zA-Z0-9-]*\.loca\.lt' tunnel.log | head -1)
-          echo "Keeping server alive at: $URL"
+          echo "Server running. Keeping alive for up to 6 hours..."
           for i in $(seq 1 340); do
             sleep 60
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:5000/healthz 2>/dev/null)
@@ -100,7 +103,10 @@ jobs:
               nohup python app.py > flask.log 2>&1 &
               sleep 5
             fi
-            if [ $((i % 10)) -eq 0 ]; then
-              echo "[$i/340] Still live: $URL"
+            # Restart Serveo if it died
+            if ! pgrep -f "serveo.net" > /dev/null; then
+              ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 \
+                -R 80:localhost:5000 serveo.net > /tmp/serveo.log 2>&1 &
             fi
+            if [ $((i % 15)) -eq 0 ]; then echo "[$i/340] Still live"; fi
           done
