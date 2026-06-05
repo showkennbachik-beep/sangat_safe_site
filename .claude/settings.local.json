@@ -25,7 +25,17 @@
       "PowerShell(Start-Process \"https://github.com/showkennbachik-beep/sangat_safe_site/actions\")",
       "Read(//tmp/**)",
       "PowerShell(Start-Process \"https://github.com/showkennbachik-beep/sangat_safe_site/actions/runs/26570317552\")",
-      "PowerShell(Start-Process \"https://github.com/showkennbachik-beep/sangat_safe_site/blob/main/LIVE_URL.txt\")"
+      "PowerShell(Start-Process \"https://github.com/showkennbachik-beep/sangat_safe_site/blob/main/LIVE_URL.txt\")",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(where cloudflared *)",
+      "Bash(python -c \"import flask; print\\('Flask OK'\\)\")",
+      "Bash(python -c \"import fitz; print\\('PyMuPDF OK'\\)\")",
+      "Bash(python -c \"import PIL; print\\('Pillow OK'\\)\")",
+      "Bash(python -c \"import flask_compress, dotenv, reportlab, pdfplumber; print\\('All OK'\\)\")",
+      "Bash(git credential *)",
+      "Bash(git commit *)",
+      "Bash(start *)"
     ]
   }
 }

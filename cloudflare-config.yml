@@ -1,0 +1,7 @@
+﻿tunnel: 106d9ffa-955b-4b75-855f-f50e0ce3a9a8
+credentials-file: C:\Users\HP\.cloudflared\106d9ffa-955b-4b75-855f-f50e0ce3a9a8.json
+
+ingress:
+  - hostname: sangat-tools.is-a.dev
+    service: http://localhost:5000
+  - service: http_status:404

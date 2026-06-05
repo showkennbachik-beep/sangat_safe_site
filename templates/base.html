@@ -578,6 +578,106 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- ============================================================
+         TOUCH SWIPE PAGE NAVIGATION
+         Swipe UP at bottom of page → next page
+         Swipe DOWN at top of page  → previous page
+         ============================================================ -->
+    <script>
+    (function () {
+        var PAGE_ORDER = ['/', '/features', '/pricing', '/about', '/blog', '/contact'];
+
+        var touchStartY = 0, touchStartX = 0, touchStartScrollY = 0;
+        var navigating = false;
+        var hintTimer = null;
+
+        // Create top and bottom hint elements
+        function makeHint(pos, label, arrowUp) {
+            var el = document.createElement('div');
+            el.className = 'swipe-hint swipe-hint-' + pos;
+            el.innerHTML = (arrowUp
+                ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>'
+                : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>')
+                + ' ' + label;
+            document.body.appendChild(el);
+            return el;
+        }
+
+        var currentPath = window.location.pathname;
+        var idx = PAGE_ORDER.indexOf(currentPath);
+
+        var hintTop = null, hintBottom = null;
+        if (idx > 0)                        hintTop    = makeHint('top',    'Swipe down for ' + PAGE_ORDER[idx - 1].replace('/', '') || 'Home', false);
+        if (idx !== -1 && idx < PAGE_ORDER.length - 1) hintBottom = makeHint('bottom', 'Swipe up for ' + (PAGE_ORDER[idx + 1].replace('/', '') || 'next'), true);
+
+        function showHint(el) {
+            if (!el) return;
+            clearTimeout(hintTimer);
+            el.classList.add('visible');
+            hintTimer = setTimeout(function () { el.classList.remove('visible'); }, 1800);
+        }
+
+        function navigateTo(url) {
+            if (navigating) return;
+            navigating = true;
+            var overlay = document.getElementById('page-transition');
+            if (overlay) {
+                overlay.style.display = 'flex';
+                void overlay.offsetWidth;
+                overlay.classList.remove('hidden');
+                overlay.classList.add('active');
+                setTimeout(function () { window.location.href = url; }, 300);
+            } else {
+                window.location.href = url;
+            }
+        }
+
+        document.addEventListener('touchstart', function (e) {
+            if (e.touches.length !== 1) return;
+            touchStartY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
+            touchStartScrollY = window.scrollY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', function (e) {
+            if (e.touches.length !== 1 || navigating) return;
+            var dy = touchStartY - e.touches[0].clientY;
+            var dx = Math.abs(touchStartX - e.touches[0].clientX);
+            if (Math.abs(dy) < 30 || dx > Math.abs(dy) * 0.7) return;
+
+            var scrollY  = window.scrollY;
+            var maxScroll = Math.max(0, document.body.scrollHeight - window.innerHeight);
+
+            if (dy > 0 && scrollY >= maxScroll - 5)  showHint(hintBottom);
+            if (dy < 0 && scrollY <= 5 && touchStartScrollY <= 5) showHint(hintTop);
+        }, { passive: true });
+
+        document.addEventListener('touchend', function (e) {
+            if (navigating) return;
+            var dy = touchStartY - e.changedTouches[0].clientY;
+            var dx = Math.abs(touchStartX - e.changedTouches[0].clientX);
+            var scrollY  = window.scrollY;
+            var maxScroll = Math.max(0, document.body.scrollHeight - window.innerHeight);
+
+            // Must be a strong vertical swipe, not mostly horizontal
+            if (Math.abs(dy) < 80 || dx > Math.abs(dy) * 0.6) return;
+
+            if (idx === -1) return; // page not in navigation order
+
+            // Swipe UP (finger moves up) at bottom → next page
+            if (dy > 0 && scrollY >= maxScroll - 20 && idx < PAGE_ORDER.length - 1) {
+                navigateTo(PAGE_ORDER[idx + 1]);
+                return;
+            }
+
+            // Swipe DOWN (finger moves down) at top → previous page
+            if (dy < 0 && scrollY <= 20 && touchStartScrollY <= 20 && idx > 0) {
+                navigateTo(PAGE_ORDER[idx - 1]);
+            }
+        }, { passive: true });
+    })();
+    </script>
+
+    <!-- ============================================================
          MOBILE BOTTOM NAVIGATION
          ============================================================ -->
     <nav class="app-bottom-nav" aria-label="Main navigation" id="app-bottom-nav">
